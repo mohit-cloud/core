@@ -34,7 +34,7 @@ SEGasSubstanceQuantity::SEGasSubstanceQuantity(SESubstance& sub, SEGasCompartmen
 //-------------------------------------------------------------------------------
 SEGasSubstanceQuantity::~SEGasSubstanceQuantity()
 {
-  Clear();
+  SEGasSubstanceQuantity::Clear();
 }
 //-------------------------------------------------------------------------------
 void SEGasSubstanceQuantity::Invalidate()

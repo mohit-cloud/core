@@ -39,10 +39,8 @@ SEScalar::SEScalar(double v)
 SEScalar::SEScalar()
   : SEProperty()
   , m_readOnly(false)
-  , m_value(1.0)
-{
-  Clear();
-}
+  , m_value(NaN)
+{}
 
 //-------------------------------------------------------------------------------
 SEScalar::~SEScalar()

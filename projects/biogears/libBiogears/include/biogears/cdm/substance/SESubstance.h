@@ -49,6 +49,10 @@ class TimeMassPerVolumeUnit;
 class BIOGEARS_API SESubstance : public Loggable {
 public:
   SESubstance(Logger* logger);
+  SESubstance(const SESubstance&) = delete;
+  SESubstance(SESubstance&&);
+  SESubstance& operator=(const SESubstance&) = delete;
+  SESubstance& operator=(SESubstance&&) noexcept;
   virtual ~SESubstance();
 
   virtual void Clear();
@@ -82,24 +86,24 @@ public:
 
   virtual bool HasDensity() const;
   virtual SEScalarMassPerVolume& GetDensity();
-  virtual double GetDensity(const MassPerVolumeUnit& unit) const;
+  virtual double GetDensity(const MassPerVolumeUnit& unit) const noexcept;
 
   virtual bool HasMolarMass() const;
   virtual SEScalarMassPerAmount& GetMolarMass();
-  virtual double GetMolarMass(const MassPerAmountUnit& unit) const;
+  virtual double GetMolarMass(const MassPerAmountUnit& unit) const noexcept;
 
   // Diffusion-ish
   virtual bool HasMaximumDiffusionFlux() const;
   virtual SEScalarMassPerAreaTime& GetMaximumDiffusionFlux();
-  virtual double GetMaximumDiffusionFlux(const MassPerAreaTimeUnit& unit) const;
+  virtual double GetMaximumDiffusionFlux(const MassPerAreaTimeUnit& unit) const noexcept;
 
   virtual bool HasMichaelisCoefficient() const;
   virtual SEScalar& GetMichaelisCoefficient();
-  virtual double GetMichaelisCoefficient() const;
+  virtual double GetMichaelisCoefficient() const noexcept;
 
   virtual bool HasMembraneResistance() const;
   virtual SEScalarElectricResistance& GetMembraneResistance();
-  virtual double GetMembraneResistance(const ElectricResistanceUnit& unit) const;
+  virtual double GetMembraneResistance(const ElectricResistanceUnit& unit) const noexcept;
 
   // Cellular and Blood
   CDM::enumBloodTypeABO::value GetAntigen() const;
@@ -110,118 +114,87 @@ public:
   // Liquid-ish
   virtual bool HasAerosolization() const;
   virtual SESubstanceAerosolization& GetAerosolization();
-  virtual const SESubstanceAerosolization* GetAerosolization() const;
-  virtual void RemoveAerosolization();
+  virtual const SESubstanceAerosolization* GetAerosolization() const noexcept;
 
   virtual bool HasAreaUnderCurve() const;
   virtual SEScalarTimeMassPerVolume& GetAreaUnderCurve();
-  virtual double GetAreaUnderCurve(const TimeMassPerVolumeUnit& unit) const;
+  virtual double GetAreaUnderCurve(const TimeMassPerVolumeUnit& unit) const noexcept;
 
   virtual bool HasBloodConcentration() const;
   virtual SEScalarMassPerVolume& GetBloodConcentration();
-  virtual double GetBloodConcentration(const MassPerVolumeUnit& unit) const;
+  virtual double GetBloodConcentration(const MassPerVolumeUnit& unit) const noexcept;
 
   virtual bool HasEffectSiteConcentration() const;
   virtual SEScalarMassPerVolume& GetEffectSiteConcentration();
-  virtual double GetEffectSiteConcentration(const MassPerVolumeUnit& unit) const;
+  virtual double GetEffectSiteConcentration(const MassPerVolumeUnit& unit) const noexcept;
 
   virtual bool HasMassInBody() const;
   virtual SEScalarMass& GetMassInBody();
-  virtual double GetMassInBody(const MassUnit& unit) const;
+  virtual double GetMassInBody(const MassUnit& unit) const noexcept;
 
   virtual bool HasMassInBlood() const;
   virtual SEScalarMass& GetMassInBlood();
-  virtual double GetMassInBlood(const MassUnit& unit) const;
+  virtual double GetMassInBlood(const MassUnit& unit) const noexcept;
 
   virtual bool HasMassInTissue() const;
   virtual SEScalarMass& GetMassInTissue();
-  virtual double GetMassInTissue(const MassUnit& unit) const;
+  virtual double GetMassInTissue(const MassUnit& unit) const noexcept;
 
   virtual bool HasPlasmaConcentration() const;
   virtual SEScalarMassPerVolume& GetPlasmaConcentration();
-  virtual double GetPlasmaConcentration(const MassPerVolumeUnit& unit) const;
+  virtual double GetPlasmaConcentration(const MassPerVolumeUnit& unit) const noexcept;
 
   virtual bool HasSystemicMassCleared() const;
   virtual SEScalarMass& GetSystemicMassCleared();
-  virtual double GetSystemicMassCleared(const MassUnit& unit) const;
+  virtual double GetSystemicMassCleared(const MassUnit& unit) const noexcept;
 
   virtual bool HasTissueConcentration() const;
   virtual SEScalarMassPerVolume& GetTissueConcentration();
-  virtual double GetTissueConcentration(const MassPerVolumeUnit& unit) const;
+  virtual double GetTissueConcentration(const MassPerVolumeUnit& unit) const noexcept;
 
   // Gas-ish
   virtual bool HasAlveolarTransfer() const;
   virtual SEScalarVolumePerTime& GetAlveolarTransfer();
-  virtual double GetAlveolarTransfer(const VolumePerTimeUnit& unit) const;
+  virtual double GetAlveolarTransfer(const VolumePerTimeUnit& unit) const noexcept;
 
   virtual bool HasDiffusingCapacity() const;
   virtual SEScalarVolumePerTimePressure& GetDiffusingCapacity();
-  virtual double GetDiffusingCapacity(const VolumePerTimePressureUnit& unit) const;
+  virtual double GetDiffusingCapacity(const VolumePerTimePressureUnit& unit) const noexcept;
 
   virtual bool HasEndTidalFraction() const;
   virtual SEScalarFraction& GetEndTidalFraction();
-  virtual double GetEndTidalFraction() const;
+  virtual double GetEndTidalFraction() const noexcept;
 
   virtual bool HasEndTidalPressure() const;
   virtual SEScalarPressure& GetEndTidalPressure();
-  virtual double GetEndTidalPressure(const PressureUnit& unit) const;
+  virtual double GetEndTidalPressure(const PressureUnit& unit) const noexcept;
 
   virtual bool HasRelativeDiffusionCoefficient() const;
   virtual SEScalar& GetRelativeDiffusionCoefficient();
-  virtual double GetRelativeDiffusionCoefficient() const;
+  virtual double GetRelativeDiffusionCoefficient() const noexcept;
 
   virtual bool HasSolubilityCoefficient() const;
   virtual SEScalarInversePressure& GetSolubilityCoefficient();
-  virtual double GetSolubilityCoefficient(const InversePressureUnit& unit) const;
+  virtual double GetSolubilityCoefficient(const InversePressureUnit& unit) const noexcept;
 
   virtual bool HasClearance() const;
   virtual SESubstanceClearance& GetClearance();
   virtual const SESubstanceClearance* GetClearance() const;
-  virtual void RemoveClearance();
+
 
   virtual bool HasPK() const;
   virtual SESubstancePharmacokinetics& GetPK();
   virtual const SESubstancePharmacokinetics* GetPK() const;
-  virtual void RemovePK();
+
 
   virtual bool HasPD() const;
   virtual SESubstancePharmacodynamics& GetPD();
   virtual const SESubstancePharmacodynamics* GetPD() const;
-  virtual void RemovePD();
+
 
 protected:
-  std::string m_Name;
-  CDM::enumSubstanceClass::value m_Classification;
-  CDM::enumSubstanceState::value m_State;
-  SEScalarMassPerVolume* m_Density;
-  SEScalarMassPerAmount* m_MolarMass;
 
-  SEScalarMassPerAreaTime* m_MaximumDiffusionFlux;
-  SEScalar* m_MichaelisCoefficient;
-  SEScalarElectricResistance* m_MembraneResistance;
-
-  CDM::enumBloodTypeABO::value m_Antigen;
-
-  SESubstanceAerosolization* m_Aerosolization;
-  SEScalarTimeMassPerVolume* m_AreaUnderCurve;
-  SEScalarMassPerVolume* m_BloodConcentration;
-  SEScalarMassPerVolume* m_EffectSiteConcentration;
-  SEScalarMass* m_MassInBody;
-  SEScalarMass* m_MassInBlood;
-  SEScalarMass* m_MassInTissue;
-  SEScalarMassPerVolume* m_PlasmaConcentration;
-  SEScalarMass* m_SystemicMassCleared;
-  SEScalarMassPerVolume* m_TissueConcentration;
-
-  SEScalarVolumePerTime* m_AlveolarTransfer;
-  SEScalarVolumePerTimePressure* m_DiffusingCapacity;
-  SEScalarFraction* m_EndTidalFraction;
-  SEScalarPressure* m_EndTidalPressure;
-  SEScalar* m_RelativeDiffusionCoefficient;
-  SEScalarInversePressure* m_SolubilityCoefficient;
-
-  SESubstanceClearance* m_Clearance;
-  SESubstancePharmacokinetics* m_PK;
-  SESubstancePharmacodynamics* m_PD;
+  struct Implementation;
+  std::unique_ptr<Implementation> m_impl;
 };
 }

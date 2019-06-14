@@ -37,7 +37,6 @@ endif()
 ###############################################################################
 #Sorce and Header Defines
 ###############################################################################
-message(STATUS "")
 message(STATUS "Configuring ${PROJECT_NAME}")
 
 #Scenario Driver
@@ -78,8 +77,8 @@ set_target_properties(${PROJECT_NAME}
   CXX_STANDARD 14
   VS_DEBUGGER_WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/runtime
   )
-  target_compile_definitions(${PROJECT_NAME} PRIVATE ${${PREFIX}_CPPFLAGS} )
-  target_compile_options(${PROJECT_NAME} PRIVATE $<$<PLATFORM_ID:Windows>:/bigobj> PRIVATE $<$<PLATFORM_ID:Windows>:/MP${${ROOT_PROJECT_NAME}_BUILD_PARALLEL_LEVEL}>)
+target_compile_definitions(${PROJECT_NAME} PRIVATE ${${PREFIX}_CPPFLAGS} )
+target_compile_options(${PROJECT_NAME} PRIVATE $<$<PLATFORM_ID:Windows>:/bigobj> PRIVATE $<$<PLATFORM_ID:Windows>:/MP${${ROOT_PROJECT_NAME}_BUILD_PARALLEL_LEVEL}>)
 ###############################################################################
 # COMPILATION & LINKAGE MODIFICATIONS
 ###############################################################################
@@ -147,5 +146,4 @@ if(NOT CMAKE_CROSSCOMPILING AND NOT APPLE)
    )
 ")
 endif()
-message(STATUS "")
 endif()

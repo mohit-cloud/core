@@ -36,7 +36,6 @@ endif()
 ###############################################################################
 #Sorce and Header Defines
 ###############################################################################
-message(STATUS "")
 message(STATUS "Configuring ${PROJECT_NAME}")
 
 #Scenario Driver
@@ -89,9 +88,6 @@ list(APPEND ${PREFIX}_INCLUDES
 )
 list(REMOVE_DUPLICATES ${PREFIX}_INCLUDES)
 
-foreach( ITEM IN LISTS ${PREFIX}_INCLUDES)
-  message(STATUS "  ${${ITEM}}")
-endforeach()
 set(${PREFIX}_LIBS
       ${CMAKE_THREAD_LIBS_INIT}
       ${CMAKE_DL_LIBS}
@@ -118,5 +114,4 @@ endif()
      ARCHIVE DESTINATION lib
   )
 
-message(STATUS "")
 endif()

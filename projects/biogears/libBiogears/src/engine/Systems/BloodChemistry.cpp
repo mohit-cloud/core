@@ -713,6 +713,11 @@ void BloodChemistry::AcuteInflammatoryResponse()
   double pathogenGrowthRate = 0.0; //Note bifurcation at approximately kpg = 1.6
   double damageRecovery = 0.0;
 
+  if (m_data.GetActions().GetPatientActions().HasHemorrhage()) {
+    if (std::find(sources.begin(), sources.end(), CDM::enumInflammationSource::Hemorrhage) == sources.end()){
+      GetAcuteInflammatoryResponse().GetInflammationSources().push_back(CDM::enumInflammationSource::Hemorrhage);
+    }
+  }
   if (m_data.GetActions().GetPatientActions().HasBurnWound()) {
     burnTotalBodySurfaceArea = m_data.GetActions().GetPatientActions().GetBurnWound()->GetTotalBodySurfaceArea().GetValue();
     scaleFactor = 1.0;

@@ -215,6 +215,7 @@ void Cardiovascular::Initialize()
   GetSystemicVascularResistance().SetValue(systemicVascularResistance_mmHg_s_Per_mL, FlowResistanceUnit::mmHg_s_Per_mL);
   m_LeftHeartElastanceMax_mmHg_Per_mL = m_data.GetConfiguration().GetLeftHeartElastanceMaximum(FlowElastanceUnit::mmHg_Per_mL);
   m_RightHeartElastanceMax_mmHg_Per_mL = m_data.GetConfiguration().GetRightHeartElastanceMaximum(FlowElastanceUnit::mmHg_Per_mL);
+  m_patient->GetBloodVolumeBaseline().Set(GetBloodVolume());
 }
 
 bool Cardiovascular::Load(const CDM::BioGearsCardiovascularSystemData& in)

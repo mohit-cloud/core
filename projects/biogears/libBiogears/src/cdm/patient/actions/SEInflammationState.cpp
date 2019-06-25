@@ -14,6 +14,7 @@ specific language governing permissions and limitations under the License.
 
 #include <biogears/cdm/properties/SEScalar.h>
 #include <biogears/cdm/properties/SEScalar0To1.h>
+#include <biogears/cdm/properties/SEScalarTime.h>
 
 namespace biogears {
 
@@ -34,7 +35,9 @@ SEInflammationState::SEInflammationState()
   , m_Interleukin10(nullptr)
   , m_Interleukin12(nullptr)
   , m_Catecholamines(nullptr)
+  , m_AutonomicResponseLevel(nullptr)
   , m_TissueIntegrity(nullptr)
+  , m_InflammationTime(nullptr)
 {
 }
 //-------------------------------------------------------------------------------
@@ -83,7 +86,9 @@ bool SEInflammationState::Load(const CDM::InflammationStateData& in)
   GetInterleukin10().Load(in.Interleukin10());
   GetInterleukin12().Load(in.Interleukin12());
   GetCatecholamines().Load(in.Catecholamines());
+  GetAutonomicResponseLevel().Load(in.AutonomicResponseLevel());
   GetTissueIntegrity().Load(in.TissueIntegrity());
+  GetInflammationTime().Load(in.InflammationTime());
   for (auto src : in.Source()){
     m_InflammationSources.push_back(src);
   }
@@ -115,7 +120,9 @@ void SEInflammationState::Unload(CDM::InflammationStateData& data) const
   data.Interleukin10(std::unique_ptr<CDM::ScalarData>(m_Interleukin10->Unload()));
   data.Interleukin12(std::unique_ptr<CDM::ScalarData>(m_Interleukin12->Unload()));
   data.Catecholamines(std::unique_ptr<CDM::ScalarData>(m_Catecholamines->Unload()));
+  data.AutonomicResponseLevel(std::unique_ptr<CDM::ScalarData>(m_AutonomicResponseLevel->Unload()));
   data.TissueIntegrity(std::unique_ptr<CDM::Scalar0To1Data>(m_TissueIntegrity->Unload()));
+  data.InflammationTime(std::unique_ptr<CDM::ScalarTimeData>(m_InflammationTime->Unload()));
   for (auto src : m_InflammationSources) {
     data.Source().push_back(src);
   }
@@ -140,12 +147,14 @@ void SEInflammationState::InitializeState()
   GetInterleukin10().SetValue(80.0);    //Value is in pg/L-->gets scaled down in model  
   GetInterleukin12().SetValue(0.0);
   GetCatecholamines().SetValue(0.0);
+  GetAutonomicResponseLevel().SetValue(0.0);
   GetTissueIntegrity().SetValue(1.0);
+  GetInflammationTime().SetValue(0.0, TimeUnit::hr);
 }
 //-------------------------------------------------------------------------------
 bool SEInflammationState::IsValid()
 {
-  if (HasPathogen() && HasTrauma() && HasMacrophageResting() && HasMacrophageActive() && HasNeutrophilResting() && HasNeutrophilActive() && HasInducibleNOSynthasePre() && HasInducibleNOSynthase() && HasConstitutiveNOSynthase() && HasNitrate() && HasNitricOxide() && HasTumorNecrosisFactor() && HasInterleukin6() && HasInterleukin10() && HasInterleukin12() && HasCatecholamines() && HasTissueIntegrity())
+  if (HasPathogen() && HasTrauma() && HasMacrophageResting() && HasMacrophageActive() && HasNeutrophilResting() && HasNeutrophilActive() && HasInducibleNOSynthasePre() && HasInducibleNOSynthase() && HasConstitutiveNOSynthase() && HasNitrate() && HasNitricOxide() && HasTumorNecrosisFactor() && HasInterleukin6() && HasInterleukin10() && HasInterleukin12() && HasCatecholamines() && HasTissueIntegrity() && HasAutonomicResponseLevel())
     return true;
   else
     return false;
@@ -188,6 +197,8 @@ const SEScalar* SEInflammationState::GetScalar(const std::string& name)
     return &GetInterleukin10();
   if (name.compare("Interleukin12") == 0)
     return &GetInterleukin12();
+  if (name.compare("AutonomicResponseLevel") == 0)
+    return &GetAutonomicResponseLevel();
   if (name.compare("Catecholamines") == 0)
     return &GetCatecholamines();
   if (name.compare("TissueIntegrity") == 0)
@@ -500,6 +511,25 @@ double SEInflammationState::GetCatecholamines() const
   return m_Catecholamines->GetValue();
 }
 //-------------------------------------------------------------------------------
+bool SEInflammationState::HasAutonomicResponseLevel() const
+{
+  return m_AutonomicResponseLevel == nullptr ? false : m_AutonomicResponseLevel->IsValid();
+}
+//-------------------------------------------------------------------------------
+SEScalar& SEInflammationState::GetAutonomicResponseLevel()
+{
+  if (m_AutonomicResponseLevel == nullptr)
+    m_AutonomicResponseLevel = new SEScalar();
+  return *m_AutonomicResponseLevel;
+}
+//-------------------------------------------------------------------------------
+double SEInflammationState::GetAutonomicResponseLevel() const
+{
+  if (m_AutonomicResponseLevel == nullptr)
+    return SEScalar::dNaN();
+  return m_AutonomicResponseLevel->GetValue();
+}
+//-------------------------------------------------------------------------------
 bool SEInflammationState::HasTissueIntegrity() const
 {
   return m_TissueIntegrity == nullptr ? false : m_TissueIntegrity->IsValid();
@@ -519,6 +549,13 @@ double SEInflammationState::GetTissueIntegrity() const
   return m_TissueIntegrity->GetValue();
 }
 //-------------------------------------------------------------------------------
+SEScalarTime& SEInflammationState::GetInflammationTime()
+{
+  if (m_InflammationTime == nullptr)
+    m_InflammationTime = new SEScalarTime();
+  return *m_InflammationTime;
+}
+//-------------------------------------------------------------------------------
 bool SEInflammationState::HasInflammationSources() const
 {
   return !m_InflammationSources.empty();
@@ -529,4 +566,22 @@ std::vector<CDM::enumInflammationSource>& SEInflammationState::GetInflammationSo
   return m_InflammationSources;
 }
 //-------------------------------------------------------------------------------
+
+bool SEInflammationState::HasHemorrhageSource() const
+{
+  return std::find(m_InflammationSources.begin(), m_InflammationSources.end(), CDM::enumInflammationSource::Hemorrhage) == m_InflammationSources.end() ?  false : true;
+}
+//-------------------------------------------------------------------------------
+bool SEInflammationState::HasPathogenSource() const
+{
+  return std::find(m_InflammationSources.begin(), m_InflammationSources.end(), CDM::enumInflammationSource::Pathogen) == m_InflammationSources.end() ? false : true;
+}
+//-------------------------------------------------------------------------------
+bool SEInflammationState::HasBurnSource() const
+{
+  return std::find(m_InflammationSources.begin(), m_InflammationSources.end(), CDM::enumInflammationSource::Burn) == m_InflammationSources.end() ? false : true;
+}
+//-------------------------------------------------------------------------------
+
+
 }

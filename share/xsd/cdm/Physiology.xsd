@@ -59,7 +59,9 @@ specific language governing permissions and limitations under the License.
 					<xs:element name="Interleukin10" type="ScalarData" minOccurs="1" maxOccurs="1"/>
 					<xs:element name="Interleukin12" type="ScalarData" minOccurs="1" maxOccurs="1"/>
 					<xs:element name="Catecholamines" type="ScalarData" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="AutonomicResponseLevel" type="ScalarData" minOccurs="1" maxOccurs="1"/>
 					<xs:element name="TissueIntegrity" type="Scalar0To1Data" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="InflammationTime" type="ScalarTimeData" minOccurs="1" maxOccurs="1"/>
 					<xs:element name="Source" type="enumInflammationSource" minOccurs="0" maxOccurs="3"/>
 				</xs:sequence>
 			</xs:extension>

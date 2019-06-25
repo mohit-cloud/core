@@ -125,5 +125,6 @@ protected:
   SELiquidSubstanceQuantity* m_venaCavaSodium;
   SELiquidSubstanceQuantity* m_venaCavaTriacylglycerol;
   SELiquidSubstanceQuantity* m_venaCavaUrea;
+
 };
 }

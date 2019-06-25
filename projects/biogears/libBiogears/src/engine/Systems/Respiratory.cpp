@@ -211,7 +211,6 @@ void Respiratory::Initialize()
 
   //Get the fluid mechanics to a good starting point
   TuneCircuit();
-
 }
 
 bool Respiratory::Load(const CDM::BioGearsRespiratorySystemData& in)
@@ -993,7 +992,6 @@ void Respiratory::ProcessDriverActions()
   double NMBModifier = 1.0;
   double SedationModifier = 1.0;
 
-
   if (Drugs.GetNeuromuscularBlockLevel().GetValue() > 0.135) {
     NMBModifier = 0.0;
     DrugRRChange_Per_min = 0.0;
@@ -1010,14 +1008,20 @@ void Respiratory::ProcessDriverActions()
 
   //Process Pain effects
   double painVAS = 0.1 * m_data.GetNervous().GetPainVisualAnalogueScale().GetValue(); //already processed pain score from nervous [0,10]
-  double painModifier = 1.0 + 0.75 * (painVAS / (painVAS + 0.2)); 
+  double painModifier = 1.0 + 0.75 * (painVAS / (painVAS + 0.2));
 
   //Process Sepsis effects
-  double sepsisModifier = 0.0;
-  if (m_PatientActions->HasSepsis()) {
-    double baselineRR_Per_min = m_Patient->GetRespirationRateBaseline(FrequencyUnit::Per_min);
-    double sigmoidInput = 1.0 - m_data.GetBloodChemistry().GetAcuteInflammatoryResponse().GetTissueIntegrity().GetValue();
-    sepsisModifier = baselineRR_Per_min * sigmoidInput / (sigmoidInput + 0.4);
+  double baselineRR_Per_min = m_Patient->GetRespirationRateBaseline(FrequencyUnit::Per_min);
+  double inflammationModifier = 0.0;
+  if (m_data.GetBloodChemistry().GetAcuteInflammatoryResponse().HasInflammationSources()) {
+    if (m_data.GetBloodChemistry().GetAcuteInflammatoryResponse().HasPathogenSource()) {
+      double sigmoidInput = 1.0 - m_data.GetBloodChemistry().GetAcuteInflammatoryResponse().GetTissueIntegrity().GetValue();
+      inflammationModifier = baselineRR_Per_min * sigmoidInput / (sigmoidInput + 0.4);
+    }
+    if (m_data.GetBloodChemistry().GetAcuteInflammatoryResponse().HasHemorrhageSource()) {
+      double energyDeficit_W = m_data.GetEnergy().GetEnergyDeficit(PowerUnit::W);
+	  inflammationModifier = baselineRR_Per_min * (energyDeficit_W / (35.0 + energyDeficit_W));
+    }
   }
 
   //Apply modifiers to tidal volume.  Cardiac arrest and neuromuscular block are multiplicative while drug change is additive
@@ -1042,8 +1046,8 @@ void Respiratory::ProcessDriverActions()
     m_VentilationFrequency_Per_min = 0.0;
   } else {
     m_VentilationFrequency_Per_min = GetTargetPulmonaryVentilation(VolumePerTimeUnit::L_Per_min) / m_TargetTidalVolume_L;
-    m_VentilationFrequency_Per_min += sepsisModifier;
-    m_VentilationFrequency_Per_min *= painModifier; 
+    m_VentilationFrequency_Per_min += inflammationModifier;
+    m_VentilationFrequency_Per_min *= painModifier;
     m_VentilationFrequency_Per_min *= NMBModifier * SedationModifier;
     m_VentilationFrequency_Per_min += DrugRRChange_Per_min;
   }
@@ -1166,8 +1170,8 @@ void Respiratory::Intubation()
     m_data.SetIntubation(CDM::enumOnOff::On);
     SEIntubation* intubation = m_PatientActions->GetIntubation();
     switch (intubation->GetType()) {
-    case CDM::enumIntubationType::Tracheal: { 
-     // The proper way to intubate
+    case CDM::enumIntubationType::Tracheal: {
+      // The proper way to intubate
       // Airway mode handles this case by default
       break;
     }
@@ -1652,14 +1656,14 @@ void Respiratory::CalculateVitalSigns()
   double dTimeTol = 0.004167;
   m_ElapsedBreathingCycleTime_min += m_dt_min;
   if (m_BreathingCycle && ((GetTotalLungVolume(VolumeUnit::L) - m_PreviousTotalLungVolume_L) > ZERO_APPROX)
-    && (m_ElapsedBreathingCycleTime_min > dTimeTol)) {
+      && (m_ElapsedBreathingCycleTime_min > dTimeTol)) {
     m_Patient->SetEvent(CDM::enumPatientEvent::StartOfInhale, true, m_data.GetSimulationTime());
     // Calculate Respiration Rate and track time and update cycle flag
     double RespirationRate_Per_min = 0.0;
     RespirationRate_Per_min = 1.0 / m_ElapsedBreathingCycleTime_min;
     if (m_data.GetActions().GetPatientActions().HasOverride()
-      && m_data.GetActions().GetPatientActions().GetOverride()->HasRespirationRateOverride()) {
-        RespirationRate_Per_min = m_data.GetActions().GetPatientActions().GetOverride()->GetRespirationRateOverride(FrequencyUnit::Per_min);
+        && m_data.GetActions().GetPatientActions().GetOverride()->HasRespirationRateOverride()) {
+      RespirationRate_Per_min = m_data.GetActions().GetPatientActions().GetOverride()->GetRespirationRateOverride(FrequencyUnit::Per_min);
     }
     GetRespirationRate().SetValue(RespirationRate_Per_min, FrequencyUnit::Per_min);
 
@@ -1702,8 +1706,8 @@ void Respiratory::CalculateVitalSigns()
     // Calculate Total Circuit Values
     GetPulmonaryCompliance().SetValue(TidalVolume_L / PleuralDeltaPressure_cmH2O, FlowComplianceUnit::L_Per_cmH2O);
   } else if (!m_BreathingCycle
-    && (m_PreviousTotalLungVolume_L - GetTotalLungVolume(VolumeUnit::L) > ZERO_APPROX)
-    && (m_ElapsedBreathingCycleTime_min > dTimeTol)) {
+             && (m_PreviousTotalLungVolume_L - GetTotalLungVolume(VolumeUnit::L) > ZERO_APPROX)
+             && (m_ElapsedBreathingCycleTime_min > dTimeTol)) {
     m_Patient->SetEvent(CDM::enumPatientEvent::StartOfExhale, true, m_data.GetSimulationTime());
     m_BreathTimeExhale_min = m_ElapsedBreathingCycleTime_min;
     m_BreathingCycle = true;
@@ -1858,7 +1862,7 @@ void Respiratory::CalculateVitalSigns()
 void Respiratory::UpdateObstructiveResistance()
 {
   if ((!m_PatientActions->HasAsthmaAttack() && !m_data.GetConditions().HasChronicObstructivePulmonaryDisease())
-    || GetExpiratoryFlow(VolumePerTimeUnit::L_Per_s) < 0.0) // Only on exhalation
+      || GetExpiratoryFlow(VolumePerTimeUnit::L_Per_s) < 0.0) // Only on exhalation
   {
     return;
   }
@@ -2235,7 +2239,7 @@ void Respiratory::OverrideControlLoop()
   constexpr double minTotalLungVolumeOverride = 0.0; // L
   constexpr double maxTotalPulmonaryVentilationOverride = 1000.0; // L/min
   constexpr double minTotalPulmonaryVentilationOverride = 0.0; // L/min
-  
+
   double currentExpiratoryFlowOverride = 0.0; // value gets changed in next check
   double currentInspiratoryFlowOverride = 0.0; // value gets changed in next check
   double currentPulmonaryComplianceOverride = 0.0; // value gets changed in next check
@@ -2246,7 +2250,7 @@ void Respiratory::OverrideControlLoop()
   double currentTotalAlveolarVentilationOverride = 0.0; // value gets changed in next check
   double currentTotalLungVolumeOverride = 0.0; // value gets changed in next check
   double currentTotalPulmonaryVentilationOverride = 0.0; // value gets changed in next check
-  
+
   if (override->HasExpiratoryFlowOverride()) {
     currentExpiratoryFlowOverride = override->GetExpiratoryFlowOverride(VolumePerTimeUnit::L_Per_min);
   }
@@ -2277,7 +2281,6 @@ void Respiratory::OverrideControlLoop()
   if (override->HasTotalPulmonaryVentilationOverride()) {
     currentTotalPulmonaryVentilationOverride = override->GetTotalPulmonaryVentilationOverride(VolumePerTimeUnit::L_Per_min);
   }
-
 
   if ((currentExpiratoryFlowOverride < minExpiratoryFlowOverride || currentExpiratoryFlowOverride > maxExpiratoryFlowOverride) && (override->GetOverrideConformance() == CDM::enumOnOff::On)) {
     m_ss << "Expiratory Flow Override (Respiratory) set outside of bounds of validated parameter override. BioGears is no longer conformant.";

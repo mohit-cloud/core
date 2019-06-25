@@ -552,11 +552,11 @@ void Nervous::ChemoreceptorFeedback()
   //A linear relationship is assumed for the respiratory effects due to increased metabolic exertion
   double TMR_W = m_data.GetEnergy().GetTotalMetabolicRate(PowerUnit::W);
   double BMR_W = m_data.GetPatient().GetBasalMetabolicRate(PowerUnit::W);
-  double energyDeficit_W = m_data.GetEnergy().GetEnergyDeficit(PowerUnit::W);
-  double metabolicFraction = (TMR_W + energyDeficit_W) / BMR_W;
+  double metabolicFraction = TMR_W / BMR_W;
   double tunedVolumeMetabolicSlope = 0.2; //Tuned fractional increase of the tidal volume due to increased metabolic rate
   double metabolicModifier = 1.0 + tunedVolumeMetabolicSlope * (metabolicFraction - 1.0);
   nextTargetVentilation_L_Per_min *= metabolicModifier;
+
 
   // Confirm that the target does not exceed the maximum ventilation (set in configuration).
   // Flag event if max is exceeded and (if event active) check to see if it has been deactivated

@@ -2416,6 +2416,7 @@ void Tissue::CalculateTissueFluidFluxes()
     osmoticFlow->GetNextFlowSource().SetValue(hydraulicConductivity_mL_Per_min_mM * (mOsmIntra - mOsmExtra), VolumePerTimeUnit::mL_Per_min);
   }
 
+  //Probably can combine these into "HasInflammationSources"
   if (m_data.GetActions().GetPatientActions().HasBurnWound()) {
     for (auto t : m_data.GetCompartments().GetTissueCompartments()) {
       SEFluidCircuitPath* res = m_EndothelialResistancePaths[t];
@@ -2426,6 +2427,15 @@ void Tissue::CalculateTissueFluidFluxes()
     }
   }
   if (m_data.GetActions().GetPatientActions().HasSepsis()) {
+    for (auto t : m_data.GetCompartments().GetTissueCompartments()) {
+      SEFluidCircuitPath* res = m_EndothelialResistancePaths[t];
+      double resistanceModifier = m_data.GetBloodChemistry().GetAcuteInflammatoryResponse().GetTissueIntegrity().GetValue();
+      if (t->GetName() != BGE::TissueCompartment::Brain) {
+        res->GetNextResistance().SetValue(res->GetResistanceBaseline(FlowResistanceUnit::mmHg_min_Per_mL) * resistanceModifier, FlowResistanceUnit::mmHg_min_Per_mL);
+      }
+    }
+  }
+  if (m_data.GetActions().GetPatientActions().HasHemorrhage()) {
     for (auto t : m_data.GetCompartments().GetTissueCompartments()) {
       SEFluidCircuitPath* res = m_EndothelialResistancePaths[t];
       double resistanceModifier = m_data.GetBloodChemistry().GetAcuteInflammatoryResponse().GetTissueIntegrity().GetValue();

@@ -617,18 +617,25 @@ void Energy::CalculateBasalMetabolicRate()
 //--------------------------------------------------------------------------------------------------
 void Energy::ManageEnergyDeficit()
 {
-  if (m_PatientActions->HasHemorrhage()) {
+  //if (m_PatientActions->HasHemorrhage()) {
+  //  double basalTissueEnergyDemand_W = m_Patient->GetBasalMetabolicRate(PowerUnit::W) * 0.8; //We in tissue that say brain takes up 20%, and we just care about the other tissues for this process
+  //  double volFraction = m_data.GetCardiovascular().GetBloodVolume(VolumeUnit::mL) / m_Patient->GetBloodVolumeBaseline(VolumeUnit::mL);
+  //  ULIM(volFraction, 1.0);
+  //  double minVolFraction = 0.5; //i.e. half of blood volume lost
+  //  double maxDeficitMultiplier = 1.25;
+  //  double energyDeficit_W = basalTissueEnergyDemand_W * GeneralMath::LinearInterpolator(1.0, minVolFraction, 0.0, maxDeficitMultiplier, volFraction);
+  //  GetEnergyDeficit().SetValue(energyDeficit_W, PowerUnit::W);
+  //} else if (GetEnergyDeficit(PowerUnit::W) > ZERO_APPROX) {
+  //  double restoreFactor_Per_s = 0.001;
+  //  double nextEnergyDeficit_W = -restoreFactor_Per_s * m_dT_s * GetEnergyDeficit(PowerUnit::W) + GetEnergyDeficit(PowerUnit::W);
+  //  GetEnergyDeficit().SetValue(nextEnergyDeficit_W, PowerUnit::W);
+  //}
+  if (m_data.GetBloodChemistry().GetAcuteInflammatoryResponse().HasHemorrhageSource()) {
     double basalTissueEnergyDemand_W = m_Patient->GetBasalMetabolicRate(PowerUnit::W) * 0.8; //We in tissue that say brain takes up 20%, and we just care about the other tissues for this process
-    double volFraction = m_data.GetCardiovascular().GetBloodVolume(VolumeUnit::mL) / m_Patient->GetBloodVolumeBaseline(VolumeUnit::mL);
-    ULIM(volFraction, 1.0);
-    double minVolFraction = 0.5; //i.e. half of blood volume lost
-    double maxDeficitMultiplier = 1.25;
-    double energyDeficit_W = basalTissueEnergyDemand_W * GeneralMath::LinearInterpolator(1.0, minVolFraction, 0.0, maxDeficitMultiplier, volFraction);
+    double tisDamage = 1.0 - m_data.GetBloodChemistry().GetAcuteInflammatoryResponse().GetTissueIntegrity().GetValue();
+    double maxDeficitMultiplier = 1.5;
+    double energyDeficit_W = basalTissueEnergyDemand_W * 1.5 * tisDamage / (tisDamage + 0.3);
     GetEnergyDeficit().SetValue(energyDeficit_W, PowerUnit::W);
-  } else if (GetEnergyDeficit(PowerUnit::W) > ZERO_APPROX) {
-    double restoreFactor_Per_s = 0.001;
-    double nextEnergyDeficit_W = -restoreFactor_Per_s * m_dT_s * GetEnergyDeficit(PowerUnit::W) + GetEnergyDeficit(PowerUnit::W);
-    GetEnergyDeficit().SetValue(nextEnergyDeficit_W, PowerUnit::W);
   }
 }
 

@@ -294,11 +294,14 @@ void BloodChemistry::Process()
   m_data.GetSubstances().GetTriacylglycerol().GetBloodConcentration().Set(m_venaCavaTriacylglycerol->GetConcentration());
   m_data.GetSubstances().GetUrea().GetBloodConcentration().Set(m_venaCavaUrea->GetConcentration());
 
-  double otherIons_mmol_Per_L = -5.4; //Na, K, and Cl baseline concentrations give SID = 45.83, we assume baseline SID = 40.5, thus "other ions" (i.e. Mg, Ca, Ketones) make up -5.3 mmol_Per_L equivalent of charge
-  double strongIonDifference_mmol_Per_L = m_venaCavaSodium->GetMolarity(AmountPerVolumeUnit::mmol_Per_L) + m_venaCavaPotassium->GetMolarity(AmountPerVolumeUnit::mmol_Per_L) - (m_venaCavaChloride->GetMolarity(AmountPerVolumeUnit::mmol_Per_L) + (m_venaCavaLactate->GetMolarity(AmountPerVolumeUnit::mmol_Per_L))) + otherIons_mmol_Per_L;
-  //GetStrongIonDifference().SetValue(strongIonDifference_mmol_Per_L, AmountPerVolumeUnit::mmol_Per_L);
-
-
+  //A dynamic SID is used during hemorrhage to determine pH changes under lactic acidosis conditions.  It has not been tested
+  //enough with excercise to validate it for all scenarios, so we are only using it for hemorrhage for now.
+  if (GetAcuteInflammatoryResponse().HasHemorrhageSource()) {
+    double otherIons_mmol_Per_L = 42.31; //We assume baseline SID = 40.5.  Only ion we are tracking separately is lactate (1.48 mM baseline).  All other ions thus contribute constant 42.31
+    double strongIonDifference_mmol_Per_L = otherIons_mmol_Per_L - m_venaCavaLactate->GetMolarity(AmountPerVolumeUnit::mmol_Per_L);
+    GetStrongIonDifference().SetValue(strongIonDifference_mmol_Per_L, AmountPerVolumeUnit::mmol_Per_L); 
+  }
+ 
   // Calculate pH
   GetArterialBloodPH().Set(m_aorta->GetPH());
   GetVenousBloodPH().Set(m_venaCava->GetPH());
@@ -703,6 +706,16 @@ void BloodChemistry::Sepsis()
   GetTotalBilirubin().SetValue(totalBilirubin_mg_Per_dL, MassPerVolumeUnit::mg_Per_dL);
 }
 
+//--------------------------------------------------------------------------------------------------
+/// \brief
+/// Manages the inflammatory response of the patient to three major insults:  infection (pathogen), burn, and hemorrhage.
+///
+/// \details
+/// It is important to note that we currently assume that only one inflammation source is present at a time.  Clearly, this is
+/// not the case in real life (a burn wound can become infected).  However, the complex behaviors that would arise from having
+/// multiple sources of inflammtion have not yet been tuned--this is an area of future work.
+//--------------------------------------------------------------------------------------------------
+
 void BloodChemistry::AcuteInflammatoryResponse()
 {
   //Handle all inflammation actions here instead of creating one action for each.  We can filter based on "InflammationSource"
@@ -713,9 +726,11 @@ void BloodChemistry::AcuteInflammatoryResponse()
   double pathogenGrowthRate = 0.0; //Note bifurcation at approximately kpg = 1.6
   double damageRecovery = 0.0;
 
-  if (m_data.GetActions().GetPatientActions().HasHemorrhage()) {
+  if (m_data.GetActions().GetPatientActions().HasHemorrhage()) { 
     if (std::find(sources.begin(), sources.end(), CDM::enumInflammationSource::Hemorrhage) == sources.end()){
       GetAcuteInflammatoryResponse().GetInflammationSources().push_back(CDM::enumInflammationSource::Hemorrhage);
+      GetAcuteInflammatoryResponse().GetTrauma().SetValue(0.0);
+      GetAcuteInflammatoryResponse().GetAutonomicResponseLevel().SetValue(0.0);
     }
   }
   if (m_data.GetActions().GetPatientActions().HasBurnWound()) {
@@ -775,14 +790,20 @@ void BloodChemistry::AcuteInflammatoryResponse()
   double IL10 = GetAcuteInflammatoryResponse().GetInterleukin10().GetValue() / il10Scale;
   double IL12 = GetAcuteInflammatoryResponse().GetInterleukin12().GetValue();
   double catecholamines = GetAcuteInflammatoryResponse().GetCatecholamines().GetValue();
+  double autoResponse = GetAcuteInflammatoryResponse().GetAutonomicResponseLevel().GetValue();
   double tissueIntegrity = GetAcuteInflammatoryResponse().GetTissueIntegrity().GetValue();
+  double inflammationTime_hr = GetAcuteInflammatoryResponse().GetInflammationTime().GetValue(TimeUnit::hr);
 
   //Time step
   double dt_hr = m_data.GetTimeStep().GetValue(TimeUnit::hr);
 
   //Non-serialized variables
   double fB = 0.0;
-  double autonomic = 0.0;
+  double volEffect = m_data.GetCardiovascular().GetBloodVolume(VolumeUnit::mL) / m_data.GetPatient().GetBloodVolumeBaseline(VolumeUnit::mL);
+  ULIM(volEffect, 1.0);
+  if (volEffect < 1.0) {
+    fB = std::pow(1.0 - volEffect, 2.0) / (std::pow(0.25, 2.0) + std::pow(1.0 - volEffect, 2.0));
+  }
 
   //Model Parameters
   //Source terms
@@ -796,7 +817,8 @@ void BloodChemistry::AcuteInflammatoryResponse()
   double kBP = 0.0001; //Rate at which non-specific response exhausted by pathogen
   double maxPathogen = 20.0; //Maximum pathogen population size
   //Trauma decay
-  double kTr = 0.85; //Determined empirically to give good results
+  double kTr = 0.85; //Determined empirically to give good results for burn wound
+
   //Macrophage interaction
   double kML = 1.01, kMTR = 0.04, kM6 = 0.1, kMB = 0.0495, kMR = 0.05, kMD = 0.05, xML = 10.0, xMD = 1.0, xMTNF = 0.4, xM6 = 1.0, xM10 = 0.297, xMCA = 0.9; //Note xMD was 1.0 for burn, see if this messes things up
   //Activate macrophage interactions
@@ -822,7 +844,7 @@ void BloodChemistry::AcuteInflammatoryResponse()
   //Blood pressure
   double kB = 4.0, kBNO = 0.2, xBNO = 0.05;
   //Damage --- changed kDB from 0.02, changed xD6 from 0.25, changed kDTR from 0.05,
-  double kDB = 0.005, kD6 = 0.3, kD = damageRecovery, xD6 = 0.25, xDNO = 0.5;
+  double kDB = 1.0, kD6 = 0.3, kD = damageRecovery, xD6 = 0.25, xDNO = 0.5;  //Had kDB at 0.005--unclear why since it was not being used
   double kDTR = 0.0; //This is a base value that will be adjusted as a function of type and severity of trauma
   double kDP = 0.001; //Pathogen causes a small amount of damage by itself
   //Temperature parameters
@@ -831,11 +853,17 @@ void BloodChemistry::AcuteInflammatoryResponse()
   double kH = 0.2, nHT = 1.0, hHT = 2.0, HMax = 192.0, HBase = 72.0, tau2 = 0.003;
   //Pain threshold parameters
   double kPTP = 0.025, kPT = 0.011, PTM = 1.0;
-
+  //Autonomic response
+  double kAuto = -2.0 * inflammationTime_hr / 1.35; //From Chow
   //Adjust parameters depending on inflammation source
   if (burnTotalBodySurfaceArea != 0) {
     //Rate at which burn causes damage varies on the severity of the burn.  A larger burn causes a bigger initial hit to tissue damage
     kDTR = 5.0*burnTotalBodySurfaceArea;
+  }
+  if (GetAcuteInflammatoryResponse().HasHemorrhageSource()) {
+    kTr = 2.5;
+    kDTR = 0.0;
+    kD = 0.5;
   }
 
   double dPathogen = kPG * pathogen * (1.0 - pathogen / maxPathogen) - pathogen * kPN * neutrophilActive - sB * kPB * pathogen / (uB + kBP * pathogen); //This is assumed to be the driving force for infection / sepsis.
@@ -843,7 +871,8 @@ void BloodChemistry::AcuteInflammatoryResponse()
     //Since pathogen decreases exponentially it will never actually hit 0.  Make sure it can't rebound when population becomes 0.1% of initial pop
     dPathogen = 0.0;
   }
-  double dTrauma = -kTr * trauma; //This is assumed to be the driving force for burn
+
+  double dTrauma = -kTr * trauma; //This is assumed to be the driving force for burn.  For hemorrhage, it initiates inflammation but does not direct final outcome (volume effect does)
   double dMacrophageResting = -((kML * std::pow(xML, 2.0) * GeneralMath::HillActivation(pathogen, xML, 2.0) + kMD * GeneralMath::HillActivation(1.0 - tissueIntegrity, xMD, 4.0)) * (GeneralMath::HillActivation(TNF, xMTNF, 2.0) + kM6 * GeneralMath::HillActivation(IL6, xM6, 2.0)) + kMTR * trauma + kMB * fB) * macrophageResting * GeneralMath::HillInhibition(IL10 + catecholamines, xM10, 2.0) - kMR * (macrophageResting - sM);
   double dMacrophageActive = ((kML * std::pow(xML, 2.0) * GeneralMath::HillActivation(pathogen, xML, 2.0) + kMD * GeneralMath::HillActivation(1.0 - tissueIntegrity, xMD, 4.0)) * (GeneralMath::HillActivation(TNF, xMTNF, 2.0) + kM6 * GeneralMath::HillActivation(IL6, xM6, 2.0)) + kMTR * trauma + kMB * fB) * macrophageResting * GeneralMath::HillInhibition(IL10 + catecholamines, xM10, 2.0) - kMA * macrophageActive;
   double dNeutrophilResting = -(kNL * xNL * GeneralMath::HillActivation(pathogen, xNL, 1.0) + kNTNF * xNTNF * GeneralMath::HillActivation(TNF, xNTNF, 1.0) + kN6 * std::pow(xN6, 2.0) * GeneralMath::HillActivation(IL6, xN6, 2.0) + kND * std::pow(xND, 2.0) * GeneralMath::HillActivation(1.0 - tissueIntegrity, xND, 2.0) + kNB * fB * kNTR * trauma) * GeneralMath::HillInhibition(IL10 + catecholamines, xN10, 2.0) * neutrophilResting - kNR * (neutrophilResting - sN);
@@ -854,11 +883,12 @@ void BloodChemistry::AcuteInflammatoryResponse()
   double dNO3 = kNO3 * (nitricOxide - NO3);
   double dTNF = (kTNFN * neutrophilActive + kTNFM * macrophageActive) * GeneralMath::HillInhibition(IL10 + catecholamines, xTNF10, 2.0) * GeneralMath::HillInhibition(IL6, xTNF6, 3.0) - kTNF * TNF;
   double dIL6 = (k6N * neutrophilActive + macrophageActive) * (k6M + k6TNF * GeneralMath::HillActivation(TNF, x6TNF, 2.0) + k6NO * GeneralMath::HillActivation(nitricOxide, x6NO, 2.0)) * GeneralMath::HillInhibition(IL10 + catecholamines, x610, 2.0) * GeneralMath::HillInhibition(IL6, x66, 4.0) + k6 * (s6 - IL6);
-  double dIL10 = (k10N * neutrophilActive + macrophageActive * (1 + k10A * autonomic)) * (k10MA + k10TNF * GeneralMath::HillActivation(TNF, x10TNF, 4.0) + k106 * GeneralMath::HillActivation(IL6, x106, 4.0)) * ((1 - k10R) * GeneralMath::HillInhibition(IL12, x1012, 4.0) + k10R) - k10 * (IL10 - s10);
+  double dIL10 = (k10N * neutrophilActive + macrophageActive * (1 + k10A * autoResponse)) * (k10MA + k10TNF * GeneralMath::HillActivation(TNF, x10TNF, 4.0) + k106 * GeneralMath::HillActivation(IL6, x106, 4.0)) * ((1 - k10R) * GeneralMath::HillInhibition(IL12, x1012, 4.0) + k10R) - k10 * (IL10 - s10);
   double dIL12 = k12M * macrophageActive * GeneralMath::HillInhibition(IL10, x1210, 2.0) - k12 * IL12;
-  double dCa = kCATR * autonomic - kCA * catecholamines;
+  double dCa = kCATR * autoResponse - kCA * catecholamines;
+  double dAutoResponse = kAuto * autoResponse;
   double dTissueIntegrity = kD * (1.0 - tissueIntegrity) - tissueIntegrity * (kDB * fB + kD6 * GeneralMath::HillActivation(IL6, xD6, 2.0) + kDTR * trauma + kDP * pathogen) * (1.0 / (std::pow(xDNO, 2.0) + std::pow(nitricOxide, 2.0)));
- 
+
 
   //Increment state values--make sure to scale nitrate, tnf, il6, and il10 back up
   GetAcuteInflammatoryResponse().GetPathogen().IncrementValue(dPathogen * dt_hr * scaleFactor);
@@ -876,10 +906,12 @@ void BloodChemistry::AcuteInflammatoryResponse()
   GetAcuteInflammatoryResponse().GetInterleukin10().IncrementValue(dIL10 * dt_hr * scaleFactor * il10Scale);
   GetAcuteInflammatoryResponse().GetInterleukin12().IncrementValue(dIL12 * dt_hr * scaleFactor);
   GetAcuteInflammatoryResponse().GetCatecholamines().IncrementValue(dCa * dt_hr * scaleFactor);
+  GetAcuteInflammatoryResponse().GetAutonomicResponseLevel().IncrementValue(dAutoResponse * dt_hr);
   GetAcuteInflammatoryResponse().GetTissueIntegrity().IncrementValue(dTissueIntegrity * dt_hr * scaleFactor);
   //Nitric oxide is an algebraic relationship--update it here using new macrophage and neutrophil values
   nitricOxide = iNOS * (1.0 + kNOMA * (GetAcuteInflammatoryResponse().GetMacrophageActive().GetValue() + GetAcuteInflammatoryResponse().GetNeutrophilActive().GetValue())) + eNOS;
   GetAcuteInflammatoryResponse().GetNitricOxide().SetValue(nitricOxide);
+  GetAcuteInflammatoryResponse().GetInflammationTime().IncrementValue(dt_hr, TimeUnit::hr);
 }
 
 //--------------------------------------------------------------------------------------------------

@@ -19,6 +19,7 @@ namespace biogears {
 
 class SEScalar;
 class SEScalar0To1;
+class SEScalarTime;
 
 class BIOGEARS_API SEInflammationState {
 public:
@@ -103,12 +104,22 @@ public:
   virtual SEScalar& GetCatecholamines();
   virtual double GetCatecholamines() const;
 
+  virtual bool HasAutonomicResponseLevel() const;
+  virtual SEScalar& GetAutonomicResponseLevel();
+  virtual double GetAutonomicResponseLevel() const;
+
   virtual bool HasTissueIntegrity() const;
   virtual SEScalar0To1& GetTissueIntegrity();
   virtual double GetTissueIntegrity() const;
 
   virtual bool HasInflammationSources() const;
   virtual std::vector<CDM::enumInflammationSource>& GetInflammationSources();
+
+  virtual SEScalarTime& GetInflammationTime();
+
+  virtual bool HasHemorrhageSource() const;
+  virtual bool HasPathogenSource() const;
+  virtual bool HasBurnSource() const;
 
 protected:
   SEScalar* m_Pathogen;
@@ -128,6 +139,8 @@ protected:
   SEScalar* m_Interleukin12;
   SEScalar* m_Catecholamines;
   SEScalar0To1* m_TissueIntegrity;
+  SEScalar* m_AutonomicResponseLevel;
   std::vector<CDM::enumInflammationSource> m_InflammationSources;
+  SEScalarTime* m_InflammationTime;
 };
 }

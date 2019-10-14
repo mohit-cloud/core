@@ -106,7 +106,8 @@ SESubstance::~SESubstance()
 //-----------------------------------------------------------------------------
 void SESubstance::Clear()
 {
-  m_impl = std::make_unique<Implementation>(m_impl->Aerosolization.GetLogger());
+  auto logger = m_impl->Aerosolization.GetLogger();
+  m_impl = std::make_unique<Implementation>(logger);
 }
 //-----------------------------------------------------------------------------
 const SEScalar* SESubstance::GetScalar(const char* name)
@@ -174,9 +175,9 @@ const SEScalar* SESubstance::GetScalar(const std::string& name)
       return GetPD().GetScalar(prop);
     }
   }
-
   return nullptr;
 }
+
 //-----------------------------------------------------------------------------
 bool SESubstance::Load(const CDM::SubstanceData& in)
 {
@@ -207,15 +208,12 @@ bool SESubstance::Load(const CDM::SubstanceData& in)
   }
   if (in.MembraneResistance().present()) {
     GetMembraneResistance().Load(in.MembraneResistance().get());
-    if (in.AreaUnderCurve().present()) {
-      GetAreaUnderCurve().Load(in.AreaUnderCurve().get());
-    }
-    if (in.Antigen().present()) {
-      impl.Antigen = in.Antigen().get();
-    }
-    if (in.BloodConcentration().present()) {
-      GetBloodConcentration().Load(in.BloodConcentration().get());
-    }
+  }
+  if (in.AreaUnderCurve().present()) {
+    GetAreaUnderCurve().Load(in.AreaUnderCurve().get());
+  }
+  if (in.BloodConcentration().present()) {
+    GetBloodConcentration().Load(in.BloodConcentration().get());
   }
   if (in.EffectSiteConcentration().present()) {
     GetEffectSiteConcentration().Load(in.EffectSiteConcentration().get());
@@ -623,7 +621,7 @@ SEScalarMassPerVolume& SESubstance::GetEffectSiteConcentration()
 double SESubstance::GetEffectSiteConcentration(const MassPerVolumeUnit& unit) const noexcept
 {
   auto& impl = *m_impl;
-  return (impl.EffectSiteConcentration.IsValid()) ? impl.EffectSiteConcentration.GetValue(unit) : SEScalar::NaN;
+  return impl.EffectSiteConcentration.GetValue(unit);
 }
 //-----------------------------------------------------------------------------
 bool SESubstance::HasMassInBody() const

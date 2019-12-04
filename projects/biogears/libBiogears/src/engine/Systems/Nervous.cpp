@@ -345,7 +345,7 @@ void Nervous::CheckPainStimulus()
   double severity = 0.0;
   double painVASMapping = 0.0; //for each location map the [0,1] severity to the [0,10] VAS scale
   double tempPainVAS = 0.0; //sum, scale and store the patient score
-  double CNSPainBuffer = 1.0;
+  double PainBuffer = 1.0;
 
   m_painVAS = GetPainVisualAnalogueScale().GetValue();
 
@@ -354,17 +354,17 @@ void Nervous::CheckPainStimulus()
     m_painStimulusDuration_s = 0.0;
 
   //grab drug effects if there are in the body
-  if (m_data.GetDrugs().HasCentralNervousResponse()) {
+  if (m_data.GetDrugs().HasPainToleranceChange()) {
     double NervousScalar = 10.0;
-    double CNSModifier = m_data.GetDrugs().GetCentralNervousResponse().GetValue(); // MAKE THIS PAIN MODIFIER
-    CNSPainBuffer = exp(-CNSModifier * NervousScalar);
+    double PainModifier = m_data.GetDrugs().GetPainToleranceChange().GetValue();
+    PainBuffer = exp(-PainModifier * NervousScalar);
   }
 
   //determine pain response from inflammation caused by burn trauma
   if (m_data.GetActions().GetPatientActions().HasBurnWound()) {
     double traumaPain = m_data.GetActions().GetPatientActions().GetBurnWound()->GetTotalBodySurfaceArea().GetValue();
     traumaPain *= 20.0;   //25% TBSA burn will give pain scale = 5, 40% TBSA will give pain scale = 8.0
-    tempPainVAS += (traumaPain * susceptabilityMapping * CNSPainBuffer) / (1 + exp(-m_painStimulusDuration_s + 4.0));
+    tempPainVAS += (traumaPain * susceptabilityMapping * PainBuffer) / (1 + exp(-m_painStimulusDuration_s + 4.0));
   }
 
   //iterate over all locations to get a cumulative stimulus and buffer them
@@ -373,7 +373,7 @@ void Nervous::CheckPainStimulus()
     severity = p->GetSeverity().GetValue();
     painVASMapping = 10.0 * severity;
 
-    tempPainVAS += (painVASMapping * susceptabilityMapping * CNSPainBuffer) / (1 + exp(-m_painStimulusDuration_s + 4.0)); //temp time will increase so long as a stimulus is present
+    tempPainVAS += (painVASMapping * susceptabilityMapping * PainBuffer) / (1 + exp(-m_painStimulusDuration_s + 4.0)); //temp time will increase so long as a stimulus is present
   }
 
   //advance time over the duration of the stimulus

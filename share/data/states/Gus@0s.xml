@@ -278,9 +278,11 @@
       <DiastolicPressureModifier readOnly="false" value="-0.25"/>
       <EC50 readOnly="false" unit="ug/mL" value="0.0009"/>
       <EMaxShapeParameter readOnly="false" value="10"/>
+      <FeverModifier readOnly="false" value="0"/>
       <HeartRateModifier readOnly="false" value="0.45"/>
       <HemorrhageModifier readOnly="false" value="0"/>
       <NeuromuscularBlock readOnly="false" value="0"/>
+      <PainModifier readOnly="false" value="0"/>
       <PupillaryResponse>
         <ReactivityModifier readOnly="false" value="0"/>
         <SizeModifier readOnly="false" value="0.34"/>
@@ -650,6 +652,7 @@
   </ActiveSubstance>
   <ActiveSubstance>
     <Name>Platelet</Name>
+    <Classification>WholeBlood</Classification>
     <Density readOnly="false" unit="g/mL" value="1.06"/>
     <MolarMass readOnly="false" unit="g/mol" value="2.12e+15"/>
     <MassInBody readOnly="false" unit="ug" value="6476452748.4613"/>
@@ -668,6 +671,7 @@
   </ActiveSubstance>
   <ActiveSubstance>
     <Name>Antigen_A</Name>
+    <Classification>WholeBlood</Classification>
     <MolarMass readOnly="false" unit="g/mol" value="1212.013"/>
     <MassInBody readOnly="false" unit="ug" value="70522.6953767121"/>
     <MassInBlood readOnly="false" unit="ug" value="70522.6953767121"/>
@@ -686,10 +690,11 @@
   </ActiveSubstance>
   <ActiveSubstance>
     <Name>Antigen_B</Name>
+    <Classification>WholeBlood</Classification>
     <MolarMass readOnly="false" unit="g/mol" value="991.972"/>
-    <MassInBody readOnly="false" unit="ug" value="58259.4041673574"/>
-    <MassInBlood readOnly="false" unit="ug" value="31742.5419288411"/>
-    <MassInTissue readOnly="false" unit="ug" value="26516.8622385163"/>
+    <MassInBody readOnly="false" unit="ug" value="58257.878789457"/>
+    <MassInBlood readOnly="false" unit="ug" value="58257.878789457"/>
+    <MassInTissue readOnly="false" unit="ug" value="0"/>
     <Antigen>B</Antigen>
     <Clearance>
       <RenalDynamics>
@@ -704,6 +709,7 @@
   </ActiveSubstance>
   <ActiveSubstance>
     <Name>RedBloodCell</Name>
+    <Classification>WholeBlood</Classification>
     <Density readOnly="false" unit="g/mL" value="1.1"/>
     <MolarMass readOnly="false" unit="g/mol" value="16800000000000"/>
     <BloodConcentration readOnly="false" unit="ug/mL" value="142518.993947559"/>
@@ -723,6 +729,7 @@
   </ActiveSubstance>
   <ActiveSubstance>
     <Name>WhiteBloodCell</Name>
+    <Classification>WholeBlood</Classification>
     <Density readOnly="false" unit="g/mL" value="1.08"/>
     <MolarMass readOnly="false" unit="g/mol" value="9.29e+16"/>
     <MassInBody readOnly="false" unit="ug" value="6622071104.28356"/>
@@ -875,10 +882,12 @@
   <System xsi:type="BioGearsDrugSystemData">
     <AntibioticActivity readOnly="false" value="0"/>
     <BronchodilationLevel readOnly="false" value="7.40442554287504e-15"/>
+    <FeverChange readOnly="false" unit="degC" value="0"/>
     <HeartRateChange readOnly="false" unit="1/min" value="1.0412473419668e-12"/>
     <HemorrhageChange readOnly="false" value="0"/>
     <MeanBloodPressureChange readOnly="false" unit="mmHg" value="1.24461093158494e-13"/>
     <NeuromuscularBlockLevel readOnly="false" value="0"/>
+    <PainToleranceChange readOnly="false" value="0"/>
     <PulsePressureChange readOnly="false" unit="mmHg" value="1.47481314777785e-12"/>
     <PupillaryResponse>
       <ReactivityModifier readOnly="false" value="0"/>
@@ -1006,11 +1015,11 @@
     <RightTubularReabsorptionFiltrationSurfaceArea readOnly="false" unit="m^2" value="2.5"/>
     <RightTubularReabsorptionFluidPermeability readOnly="false" unit="mL/s mmHg m^2" value="0.0675935670594321"/>
     <UrinationRate readOnly="false" unit="mL/min" value="0"/>
-    <UrineOsmolality readOnly="false" unit="mOsm/kg" value="443.110053960872"/>
+    <UrineOsmolality readOnly="false" unit="mOsm/kg" value="443.109993475113"/>
     <UrineOsmolarity readOnly="false" unit="mOsm/L" value="645.46108991997"/>
     <UrineProductionRate readOnly="false" unit="mL/s" value="-5.22703872234066e-20"/>
     <MeanUrineOutput readOnly="false" unit="mL/day" value="237.664308869969"/>
-    <UrineSpecificGravity readOnly="false" value="1.46692940565516"/>
+    <UrineSpecificGravity readOnly="false" value="1.46692960589514"/>
     <UrineVolume readOnly="false" unit="mL" value="1.08247433739502"/>
     <UrineUreaNitrogenConcentration readOnly="false" unit="g/L" value="9.11171129651595"/>
     <Urinating>false</Urinating>
@@ -1087,15 +1096,15 @@
     <ConsciousEndPressure_cmH2O>0</ConsciousEndPressure_cmH2O>
   </System>
   <System xsi:type="BioGearsTissueSystemData">
-    <CarbonDioxideProductionRate readOnly="false" unit="mL/s" value="3.08569457357902"/>
+    <CarbonDioxideProductionRate readOnly="false" unit="mL/s" value="3.08488611113507"/>
     <DehydrationFraction readOnly="false" value="0"/>
     <ExtracellularFluidVolume readOnly="false" unit="mL" value="9861.61782692191"/>
     <ExtravascularFluidVolume readOnly="false" unit="mL" value="38932.5576471764"/>
     <IntracellularFluidPH readOnly="false" value="7"/>
     <IntracellularFluidVolume readOnly="false" unit="mL" value="29070.9398202545"/>
     <TotalBodyFluidVolume readOnly="false" unit="mL" value="45048.2192635272"/>
-    <OxygenConsumptionRate readOnly="false" unit="mL/s" value="3.26659039278788"/>
-    <RespiratoryExchangeRatio readOnly="false" value="0.885387353209682"/>
+    <OxygenConsumptionRate readOnly="false" unit="mL/s" value="3.26317558547954"/>
+    <RespiratoryExchangeRatio readOnly="false" value="0.886090653806919"/>
     <LiverInsulinSetPoint readOnly="false" unit="mmol/mL" value="1.46349862258953e-10"/>
     <LiverGlucagonSetPoint readOnly="false" unit="ug/L" value="0.079"/>
     <MuscleInsulinSetPoint readOnly="false" unit="mmol/mL" value="1.46349862258953e-10"/>
@@ -1108,9 +1117,9 @@
     <StoredFat readOnly="false" unit="g" value="15603.1084541302"/>
     <RestingPatientMass_kg>86.6840503</RestingPatientMass_kg>
     <RestingFluidMass_kg>42.7356323331611</RestingFluidMass_kg>
-    <O2ConsumedRunningAverage_mL_Per_s numSamples="33" sum="107.856051530226"/>
-    <CO2ProducedRunningAverage_mL_Per_s numSamples="33" sum="102.123286678986"/>
-    <RespiratoryQuotientRunningAverage numSamples="33" sum="29.2865730813999"/>
+    <O2ConsumedRunningAverage_mL_Per_s numSamples="33" sum="107.597691430381"/>
+    <CO2ProducedRunningAverage_mL_Per_s numSamples="33" sum="101.558318125307"/>
+    <RespiratoryQuotientRunningAverage numSamples="33" sum="29.1947761280177"/>
     <FatigueRunningAverage numSamples="32" sum="0"/>
   </System>
   <System xsi:type="BioGearsEnvironmentData">
@@ -1442,12 +1451,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.41114536757692"/>
-        <Mass readOnly="false" unit="ug" value="1775.49090043862"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49725894394909"/>
+        <Mass readOnly="false" unit="ug" value="3116.21582652874"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.45493760668337e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57411997914164e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -1707,12 +1716,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="1.58146424571666"/>
-        <Mass readOnly="false" unit="ug" value="1.71189446149605"/>
+        <Concentration readOnly="false" unit="ug/mL" value="1.7803025514528"/>
+        <Mass readOnly="false" unit="ug" value="1.92713182474653"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="1.59426298899229e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="1.7947104872444e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -1975,12 +1984,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="2.4968531429298"/>
-        <Mass readOnly="false" unit="ug" value="2346.70528087752"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="2.51706010142403e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -2239,12 +2248,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="0.560168160039081"/>
-        <Mass readOnly="false" unit="ug" value="1814.5380902352"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.64701584358309e-07"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -2506,12 +2515,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="4.43960112946873"/>
-        <Mass readOnly="false" unit="ug" value="1946.53258490355"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.50689149998317"/>
+        <Mass readOnly="false" unit="ug" value="4168.27402872435"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="4.47553068984682e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.58383049116626e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -2774,12 +2783,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="2.2865702190064"/>
-        <Mass readOnly="false" unit="ug" value="537.107725592248"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="2.30507536402882e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -3038,12 +3047,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="0.203264245360706"/>
-        <Mass readOnly="false" unit="ug" value="182.623321398664"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="2.04909256874898e-07"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -3305,12 +3314,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="true" unit="mg/mL" value="0.00538275525511701"/>
-        <Mass readOnly="true" unit="ug" value="417.122507016375"/>
+        <Concentration readOnly="true" unit="mg/mL" value="0.00949892038107217"/>
+        <Mass readOnly="true" unit="ug" value="736.093932477269"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="true" unit="mmol/mL" value="5.42631773388464e-06"/>
+        <Molarity readOnly="true" unit="mmol/mL" value="9.57579486222612e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -3580,12 +3589,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.40895528635051"/>
-        <Mass readOnly="false" unit="ug" value="75.8012988745136"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.50063556114491"/>
+        <Mass readOnly="false" unit="ug" value="133.142257153706"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.4527298011945e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57752392320036e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -3846,12 +3855,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.39994733013613"/>
-        <Mass readOnly="false" unit="ug" value="84.6956709967053"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.50084134545056"/>
+        <Mass readOnly="false" unit="ug" value="149.016292861858"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.44364894385742e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.5777313729123e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -4377,12 +4386,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.36943097737795"/>
-        <Mass readOnly="false" unit="ug" value="256.625537145156"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49778705358976"/>
+        <Mass readOnly="false" unit="ug" value="453.935382461704"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.41288562316068e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57465236275798e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -4645,12 +4654,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="1.97723458962519"/>
-        <Mass readOnly="false" unit="ug" value="4502.73658291191"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="1.99323629056585e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -4909,12 +4918,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="1.72328863231426"/>
-        <Mass readOnly="false" unit="ug" value="492.994696066469"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="1.73723515614781e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -5176,12 +5185,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="3.82056811999487"/>
-        <Mass readOnly="false" unit="ug" value="1196.70398448725"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.52321080513959"/>
+        <Mass readOnly="false" unit="ug" value="2982.92399394201"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="3.85148786457165e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.6002818679757e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -5563,12 +5572,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="1.69903163093659"/>
-        <Mass readOnly="false" unit="ug" value="567.844379351216"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="1.71278184357683e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -5827,12 +5836,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="0.179203142777018"/>
-        <Mass readOnly="false" unit="ug" value="100.667859140497"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="1.80653428501024e-07"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -6094,12 +6103,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="true" unit="mg/mL" value="0.0055989661391357"/>
-        <Mass readOnly="true" unit="ug" value="2526.62846277153"/>
+        <Concentration readOnly="true" unit="mg/mL" value="0.00949351010145125"/>
+        <Mass readOnly="true" unit="ug" value="4284.10750089632"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="true" unit="mmol/mL" value="5.64427840618052e-06"/>
+        <Molarity readOnly="true" unit="mmol/mL" value="9.57034079737256e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -6362,12 +6371,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="true" unit="mg/mL" value="0.00556588036562861"/>
-        <Mass readOnly="true" unit="ug" value="1597.32081030696"/>
+        <Concentration readOnly="true" unit="mg/mL" value="0.00949768242441665"/>
+        <Mass readOnly="true" unit="ug" value="2725.68664606825"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="true" unit="mmol/mL" value="5.61092487048889e-06"/>
+        <Molarity readOnly="true" unit="mmol/mL" value="9.57454688682408e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -6628,12 +6637,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="true" unit="mg/mL" value="0.00589064717475492"/>
-        <Mass readOnly="true" unit="ug" value="520.417652013097"/>
+        <Concentration readOnly="true" unit="mg/mL" value="0.00960236750483527"/>
+        <Mass readOnly="true" unit="ug" value="848.334894686871"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="true" unit="mmol/mL" value="5.93832000777736e-06"/>
+        <Molarity readOnly="true" unit="mmol/mL" value="9.6800791804963e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -6894,12 +6903,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.62792058318683"/>
-        <Mass readOnly="false" unit="ug" value="702.90852351089"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49401119556945"/>
+        <Mass readOnly="false" unit="ug" value="1185.77035568166"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.67346717768932e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57084594683061e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -7160,12 +7169,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.41649038368877"/>
-        <Mass readOnly="false" unit="ug" value="23.802542430503"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49724572307138"/>
+        <Mass readOnly="false" unit="ug" value="41.735252586633"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.46032587985223e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57410665126776e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -7442,12 +7451,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="6.44148580282053"/>
-        <Mass readOnly="false" unit="ug" value="404.127415815771"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49621464239589"/>
+        <Mass readOnly="false" unit="ug" value="595.775695381171"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="6.4936165565364e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57306722608691e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -7990,12 +7999,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="6.06368956592958"/>
-        <Mass readOnly="false" unit="ug" value="26.6466324048274"/>
+        <Concentration readOnly="false" unit="ug/mL" value="10.6198611063322"/>
+        <Mass readOnly="false" unit="ug" value="46.6685393462048"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="6.11276282589587e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="1.07058073275578e-05"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -8257,12 +8266,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="6.05380119513799"/>
-        <Mass readOnly="false" unit="ug" value="26.7152769103055"/>
+        <Concentration readOnly="false" unit="ug/mL" value="10.608573545441"/>
+        <Mass readOnly="false" unit="ug" value="46.8153761173087"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="6.1027944288125e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="1.06944284167708e-05"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -8525,12 +8534,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.37457491226583"/>
-        <Mass readOnly="false" unit="ug" value="639.487590459718"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49729183501421"/>
+        <Mass readOnly="false" unit="ug" value="1130.02430343008"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.41807118776118e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57415313639317e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -8793,12 +8802,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="1.79776065292869"/>
-        <Mass readOnly="false" unit="ug" value="86.5529706361529"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="1.81230987661818e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -9057,12 +9066,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="0.184524123218865"/>
-        <Mass readOnly="false" unit="ug" value="16.080602828532"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="1.86017471479906e-07"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -9324,12 +9333,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="true" unit="mg/mL" value="0.00589064717459183"/>
-        <Mass readOnly="true" unit="ug" value="260.208825999347"/>
+        <Concentration readOnly="true" unit="mg/mL" value="0.00960236750481851"/>
+        <Mass readOnly="true" unit="ug" value="424.167447342699"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="true" unit="mmol/mL" value="5.93832000761295e-06"/>
+        <Molarity readOnly="true" unit="mmol/mL" value="9.6800791804794e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -9591,12 +9600,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="6.44855868318022"/>
-        <Mass readOnly="false" unit="ug" value="610.902522312738"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49621329353795"/>
+        <Mass readOnly="false" unit="ug" value="899.621285694975"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="6.50074667750725e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57306586631271e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -9870,12 +9879,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="1.42920948062845"/>
-        <Mass readOnly="false" unit="ug" value="139.253831425392"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="1.44077603060212e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -10134,12 +10143,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="0.157906908247055"/>
-        <Mass readOnly="false" unit="ug" value="20.4122321829046"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="1.591848441761e-07"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -10401,12 +10410,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="true" unit="mg/mL" value="0.00535216017263634"/>
-        <Mass readOnly="true" unit="ug" value="1969.06699843932"/>
+        <Concentration readOnly="true" unit="mg/mL" value="0.00949729481445142"/>
+        <Mass readOnly="true" unit="ug" value="3494.06766434153"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="true" unit="mmol/mL" value="5.3954750463081e-06"/>
+        <Molarity readOnly="true" unit="mmol/mL" value="9.57415613994288e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -10671,12 +10680,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="true" unit="mg/mL" value="0.00612840256824706"/>
-        <Mass readOnly="true" unit="ug" value="179.653553342304"/>
+        <Concentration readOnly="true" unit="mg/mL" value="0.0096560354739401"/>
+        <Mass readOnly="true" unit="ug" value="283.065785051532"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="true" unit="mmol/mL" value="6.17799954862341e-06"/>
+        <Molarity readOnly="true" unit="mmol/mL" value="9.73418148288469e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -10938,12 +10947,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.43271213131032"/>
-        <Mass readOnly="false" unit="ug" value="23.8738282278934"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.50991813636177"/>
+        <Mass readOnly="false" unit="ug" value="41.7909409814559"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.47667890959656e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.58688162202337e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -11213,12 +11222,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.32186637244083"/>
-        <Mass readOnly="false" unit="ug" value="456.158737414126"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.4972606064826"/>
+        <Mass readOnly="false" unit="ug" value="814.048700955838"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.36493607928534e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57412165512998e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -11479,12 +11488,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.3322423682488"/>
-        <Mass readOnly="false" unit="ug" value="353.733126392361"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49733019609767"/>
+        <Mass readOnly="false" unit="ug" value="630.038934961153"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.37539604771989e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57419180793175e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -11745,12 +11754,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.37031140978734"/>
-        <Mass readOnly="false" unit="ug" value="1159.17513463283"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49729752439138"/>
+        <Mass readOnly="false" unit="ug" value="2049.98002842454"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.41377318088348e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57415887181431e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -12011,12 +12020,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.41383385514459"/>
-        <Mass readOnly="false" unit="ug" value="40.246727809582"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49725128384201"/>
+        <Mass readOnly="false" unit="ug" value="70.6030693935627"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.45764785210126e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57411225704154e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -12277,12 +12286,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.42930501334974"/>
-        <Mass readOnly="false" unit="ug" value="40.3085448474605"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.4957127651603"/>
+        <Mass readOnly="false" unit="ug" value="70.4985928976045"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.4732442179313e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57256128717373e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -12544,12 +12553,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="10.7337829172571"/>
-        <Mass readOnly="false" unit="ug" value="78.6152733687749"/>
+        <Concentration readOnly="false" unit="ug/mL" value="14.4803745475879"/>
+        <Mass readOnly="false" unit="ug" value="106.05567601993"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="1.08206511043226e-05"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="1.45975637896915e-05"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -12809,12 +12818,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="4.92398867378806"/>
-        <Mass readOnly="false" unit="ug" value="3.49603195838952"/>
+        <Concentration readOnly="false" unit="ug/mL" value="5.82861951332757"/>
+        <Mass readOnly="false" unit="ug" value="4.13831985446257"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="4.96383836820803e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="5.87579035832419e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -13077,12 +13086,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="2.43964318612717"/>
-        <Mass readOnly="false" unit="ug" value="822.09299528084"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="2.45938714613635e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -13341,12 +13350,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="0.231547744935263"/>
-        <Mass readOnly="false" unit="ug" value="276.876370422605"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="2.33421653973361e-07"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -13609,12 +13618,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.72648803285548"/>
-        <Mass readOnly="false" unit="ug" value="3739.50188452761"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49688205904068"/>
+        <Mass readOnly="false" unit="ug" value="6201.63844806123"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.7728323308072e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57374004411484e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -13875,12 +13884,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="true" unit="mg/mL" value="0.00535015159805398"/>
-        <Mass readOnly="true" unit="ug" value="3890.74258223788"/>
+        <Concentration readOnly="true" unit="mg/mL" value="0.0094972941938251"/>
+        <Mass readOnly="true" unit="ug" value="6906.63175776109"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="true" unit="mmol/mL" value="5.39345021639117e-06"/>
+        <Molarity readOnly="true" unit="mmol/mL" value="9.57415551429385e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -14420,12 +14429,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="2.05101112003376"/>
-        <Mass readOnly="false" unit="ug" value="8161.50970603587"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="2.06760989224874e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -14684,12 +14693,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="0.192515855411611"/>
-        <Mass readOnly="false" unit="ug" value="4078.62558062559"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="1.94073880524461e-07"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -14951,12 +14960,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="4.30194341762143"/>
-        <Mass readOnly="false" unit="ug" value="3775.54789755166"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.51038503947641"/>
+        <Mass readOnly="false" unit="ug" value="8346.67283014964"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="4.33675891821688e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.58735230377108e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -15219,12 +15228,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="1.49428679420295"/>
-        <Mass readOnly="false" unit="ug" value="183.230167414453"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="1.50638001294689e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -15483,12 +15492,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="0.162294052769791"/>
-        <Mass readOnly="false" unit="ug" value="28.315145750064"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="1.63607493729451e-07"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -15750,12 +15759,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.39379233932056"/>
-        <Mass readOnly="false" unit="ug" value="236.698108534283"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.4989752230592"/>
+        <Mass readOnly="false" unit="ug" value="416.847614232652"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.43744414088357e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57585014804772e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -16016,12 +16025,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.41785912929585"/>
-        <Mass readOnly="false" unit="ug" value="60.1244774902588"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49725249801349"/>
+        <Mass readOnly="false" unit="ug" value="105.395384119249"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.46170570267694e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57411348103928e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -16282,12 +16291,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.39180858328156"/>
-        <Mass readOnly="false" unit="ug" value="194.906839761032"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49776158011653"/>
+        <Mass readOnly="false" unit="ug" value="343.331679118623"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.43544433036573e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57462668312869e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -16821,12 +16830,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="true" unit="mg/mL" value="0.00532127638665955"/>
-        <Mass readOnly="true" unit="ug" value="902.882740166351"/>
+        <Concentration readOnly="true" unit="mg/mL" value="0.00949726094453359"/>
+        <Mass readOnly="true" unit="ug" value="1611.43912899782"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="true" unit="mmol/mL" value="5.36434131876661e-06"/>
+        <Molarity readOnly="true" unit="mmol/mL" value="9.57412199591681e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -17087,12 +17096,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="true" unit="mg/mL" value="0.00533111457875996"/>
-        <Mass readOnly="true" unit="ug" value="698.25684269473"/>
+        <Concentration readOnly="true" unit="mg/mL" value="0.00949732769069437"/>
+        <Mass readOnly="true" unit="ug" value="1243.93763243483"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="true" unit="mmol/mL" value="5.37425913106414e-06"/>
+        <Molarity readOnly="true" unit="mmol/mL" value="9.57418928225229e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -17362,12 +17371,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="true" unit="mg/mL" value="0.00536748242797882"/>
-        <Mass readOnly="true" unit="ug" value="2289.6029993768"/>
+        <Concentration readOnly="true" unit="mg/mL" value="0.00949729713403284"/>
+        <Mass readOnly="true" unit="ug" value="4051.25499632843"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="true" unit="mmol/mL" value="5.41092130420901e-06"/>
+        <Molarity readOnly="true" unit="mmol/mL" value="9.57415847829661e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -17628,12 +17637,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.41649038370687"/>
-        <Mass readOnly="false" unit="ug" value="23.8025424305825"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49724572307137"/>
+        <Mass readOnly="false" unit="ug" value="41.735252586633"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.46032587987047e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57410665126775e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -17910,12 +17919,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="6.44148580282053"/>
-        <Mass readOnly="false" unit="ug" value="404.127415815771"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49621464239589"/>
+        <Mass readOnly="false" unit="ug" value="595.775695381171"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="6.4936165565364e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57306722608691e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -18458,12 +18467,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="6.06368956600602"/>
-        <Mass readOnly="false" unit="ug" value="26.6466324051633"/>
+        <Concentration readOnly="false" unit="ug/mL" value="10.6198611064018"/>
+        <Mass readOnly="false" unit="ug" value="46.6685393465107"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="6.11276282597293e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="1.0705807327628e-05"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -18725,12 +18734,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="6.05380119520712"/>
-        <Mass readOnly="false" unit="ug" value="26.7152769106081"/>
+        <Concentration readOnly="false" unit="ug/mL" value="10.6085735455122"/>
+        <Mass readOnly="false" unit="ug" value="46.8153761176186"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="6.10279442888219e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="1.06944284168426e-05"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -18994,12 +19003,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.30288109261896"/>
-        <Mass readOnly="false" unit="ug" value="578.635111312955"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.4972698196531"/>
+        <Mass readOnly="false" unit="ug" value="1036.31472840551"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.34579715215647e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.5741309428624e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -19262,12 +19271,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="1.79776066218625"/>
-        <Mass readOnly="false" unit="ug" value="86.5529701790361"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="1.81230988595066e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -19526,12 +19535,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="0.184524126875475"/>
-        <Mass readOnly="false" unit="ug" value="16.0806032407819"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="1.86017475166108e-07"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -19793,12 +19802,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="true" unit="mg/mL" value="0.00589064717491802"/>
-        <Mass readOnly="true" unit="ug" value="260.20882601375"/>
+        <Concentration readOnly="true" unit="mg/mL" value="0.00960236750485204"/>
+        <Mass readOnly="true" unit="ug" value="424.167447344172"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="true" unit="mmol/mL" value="5.93832000794178e-06"/>
+        <Molarity readOnly="true" unit="mmol/mL" value="9.6800791805132e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -20060,12 +20069,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="6.44855868318022"/>
-        <Mass readOnly="false" unit="ug" value="610.902522312738"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49621329353795"/>
+        <Mass readOnly="false" unit="ug" value="899.621285694975"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="6.50074667750725e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57306586631271e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -20337,12 +20346,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="1.4279559318516"/>
-        <Mass readOnly="false" unit="ug" value="139.127842261734"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="1.43951233689217e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -20601,12 +20610,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="0.157766929518234"/>
-        <Mass readOnly="false" unit="ug" value="20.3941308191825"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="1.59043732603576e-07"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -20868,12 +20877,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="true" unit="mg/mL" value="0.00534809505219013"/>
-        <Mass readOnly="true" unit="ug" value="1921.67558379856"/>
+        <Concentration readOnly="true" unit="mg/mL" value="0.0094972935583762"/>
+        <Mass readOnly="true" unit="ug" value="3412.56409341956"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="true" unit="mmol/mL" value="5.39137702696259e-06"/>
+        <Molarity readOnly="true" unit="mmol/mL" value="9.57415487370228e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -21138,12 +21147,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="true" unit="mg/mL" value="0.00612840256871313"/>
-        <Mass readOnly="true" unit="ug" value="179.653553355965"/>
+        <Concentration readOnly="true" unit="mg/mL" value="0.00965603547397358"/>
+        <Mass readOnly="true" unit="ug" value="283.06578505251"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="true" unit="mmol/mL" value="6.17799954909325e-06"/>
+        <Molarity readOnly="true" unit="mmol/mL" value="9.73418148291845e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -21405,12 +21414,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.43271213138846"/>
-        <Mass readOnly="false" unit="ug" value="23.8738282282368"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.50991813642957"/>
+        <Mass readOnly="false" unit="ug" value="41.7909409817538"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.47667890967534e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.58688162209172e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -21680,12 +21689,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.32067407544977"/>
-        <Mass readOnly="false" unit="ug" value="446.724002752225"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49726128964684"/>
+        <Mass readOnly="false" unit="ug" value="797.390428041986"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.36373413307006e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57412234382305e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -21946,12 +21955,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.32995713875965"/>
-        <Mass readOnly="false" unit="ug" value="344.523716302369"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49732511942196"/>
+        <Mass readOnly="false" unit="ug" value="613.89869747368"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.37309232393621e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57418669017065e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -22212,12 +22221,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.36458459743643"/>
-        <Mass readOnly="false" unit="ug" value="1130.42786474396"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49729673417417"/>
+        <Mass readOnly="false" unit="ug" value="2001.2749679039"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.40800002160991e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57415807520189e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -22478,12 +22487,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.41383385515615"/>
-        <Mass readOnly="false" unit="ug" value="40.2467278096679"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.497251283842"/>
+        <Mass readOnly="false" unit="ug" value="70.6030693935626"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.45764785211291e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57411225704153e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -22744,12 +22753,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.4293050134386"/>
-        <Mass readOnly="false" unit="ug" value="40.3085448481175"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49571276522757"/>
+        <Mass readOnly="false" unit="ug" value="70.4985928980993"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.47324421802087e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57256128724155e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -23011,12 +23020,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="10.7337829189773"/>
-        <Mass readOnly="false" unit="ug" value="78.6152733813739"/>
+        <Concentration readOnly="false" unit="ug/mL" value="14.4803745475966"/>
+        <Mass readOnly="false" unit="ug" value="106.055676019994"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="1.08206511060567e-05"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="1.45975637897004e-05"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -23276,12 +23285,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="4.92398867392235"/>
-        <Mass readOnly="false" unit="ug" value="3.49603195848487"/>
+        <Concentration readOnly="false" unit="ug/mL" value="5.82861951327422"/>
+        <Mass readOnly="false" unit="ug" value="4.1383198544247"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="4.96383836834341e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="5.87579035827042e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -23544,12 +23553,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="1.22549621707775"/>
-        <Mass readOnly="false" unit="ug" value="1604.47014071707"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="1.23541412164633e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -23808,12 +23817,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="0.197957277585468"/>
-        <Mass readOnly="false" unit="ug" value="197.106634580588"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="1.99559339966721e-07"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -24075,12 +24084,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.03812192846135"/>
-        <Mass readOnly="false" unit="ug" value="964.212524585529"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.50852872526509"/>
+        <Mass readOnly="false" unit="ug" value="1819.77383982882"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.07889529992918e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.58548096646387e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -24604,12 +24613,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.57960331972116"/>
-        <Mass readOnly="false" unit="ug" value="1395.13384151273"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49316213208492"/>
+        <Mass readOnly="false" unit="ug" value="2373.68697997347"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.62475888404225e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.56999001190046e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -24870,12 +24879,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.61501780144183"/>
-        <Mass readOnly="false" unit="ug" value="428.586097747901"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.4938300589498"/>
+        <Mass readOnly="false" unit="ug" value="724.650165241186"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.66045997411402e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57066334427766e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -25138,12 +25147,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="2.09890750162963"/>
-        <Mass readOnly="false" unit="ug" value="75.7668467604852"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="2.1158938978415e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -25402,12 +25411,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="0.190621197296716"/>
-        <Mass readOnly="false" unit="ug" value="19.1955317813057"/>
+        <Concentration readOnly="false" unit="ug/mL" value="0"/>
+        <Mass readOnly="false" unit="ug" value="0"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="1.92163888997588e-07"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="0"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -25668,12 +25677,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.66489140929956"/>
-        <Mass readOnly="false" unit="ug" value="521.80951917788"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49775197928895"/>
+        <Mass readOnly="false" unit="ug" value="874.865383200048"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.71073720760219e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57461700460189e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -25940,12 +25949,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="true" unit="mg/mL" value="0.0049239886738552"/>
-        <Mass readOnly="true" unit="ug" value="6.99206391687439"/>
+        <Concentration readOnly="true" unit="mg/mL" value="0.00582861951330089"/>
+        <Mass readOnly="true" unit="ug" value="8.27663970888727"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="true" unit="mmol/mL" value="4.96383836827572e-06"/>
+        <Molarity readOnly="true" unit="mmol/mL" value="5.8757903582973e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -26206,12 +26215,12 @@
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>Antigen_B</Substance>
-        <Concentration readOnly="false" unit="ug/mL" value="5.297091107308"/>
-        <Mass readOnly="false" unit="ug" value="6585.41942531485"/>
+        <Concentration readOnly="false" unit="ug/mL" value="9.49726741373329"/>
+        <Mass readOnly="false" unit="ug" value="11807.1386817422"/>
         <MassCleared readOnly="false" unit="mg" value="0"/>
         <MassDeposited readOnly="false" unit="mg" value="0"/>
         <MassExcreted readOnly="false" unit="mg" value="0"/>
-        <Molarity readOnly="false" unit="mmol/mL" value="5.33996030866597e-06"/>
+        <Molarity readOnly="false" unit="mmol/mL" value="9.57412851747156e-06"/>
       </SubstanceQuantity>
       <SubstanceQuantity>
         <Substance>RedBloodCell</Substance>
@@ -28944,7 +28953,7 @@
         <PropertyConvergence Name="CoreTemperature" PercentDifference="37.0201951914915"/>
         <PropertyConvergence Name="SkinTemperature" PercentDifference="33.1304981184144"/>
       </FeedbackStabilizationCriteria>
-      <ConditionStabilization Name="ChronicAnemia">
+      <ConditionStabilization Name="ImpairedAlveolarExchange">
         <Criteria>
           <ConvergenceTime readOnly="false" unit="s" value="15"/>
           <MinimumReactionTime readOnly="false" unit="s" value="25"/>
@@ -28962,7 +28971,7 @@
           <PropertyConvergence Name="SkinTemperature" PercentDifference="NaN"/>
         </Criteria>
       </ConditionStabilization>
-      <ConditionStabilization Name="ChronicVentricularSystolicDysfunction">
+      <ConditionStabilization Name="Starvation">
         <Criteria>
           <ConvergenceTime readOnly="false" unit="s" value="15"/>
           <MinimumReactionTime readOnly="false" unit="s" value="25"/>
@@ -28998,11 +29007,101 @@
           <PropertyConvergence Name="SkinTemperature" PercentDifference="NaN"/>
         </Criteria>
       </ConditionStabilization>
+      <ConditionStabilization Name="ChronicVentricularSystolicDysfunction">
+        <Criteria>
+          <ConvergenceTime readOnly="false" unit="s" value="15"/>
+          <MinimumReactionTime readOnly="false" unit="s" value="25"/>
+          <MaximumAllowedStabilizationTime readOnly="false" unit="s" value="1000"/>
+          <PropertyConvergence Name="HeartRate" PercentDifference="NaN"/>
+          <PropertyConvergence Name="CardiacOutput" PercentDifference="NaN"/>
+          <PropertyConvergence Name="DiastolicArterialPressure" PercentDifference="NaN"/>
+          <PropertyConvergence Name="SystolicArterialPressure" PercentDifference="NaN"/>
+          <PropertyConvergence Name="TidalVolume" PercentDifference="NaN"/>
+          <PropertyConvergence Name="OxygenSaturation" PercentDifference="NaN"/>
+          <PropertyConvergence Name="EndTidalCarbonDioxideFraction" PercentDifference="NaN"/>
+          <PropertyConvergence Name="LeftAfferentArterioleResistance" PercentDifference="NaN"/>
+          <PropertyConvergence Name="RightAfferentArterioleResistance" PercentDifference="NaN"/>
+          <PropertyConvergence Name="CoreTemperature" PercentDifference="NaN"/>
+          <PropertyConvergence Name="SkinTemperature" PercentDifference="NaN"/>
+        </Criteria>
+      </ConditionStabilization>
       <ConditionStabilization Name="ChronicObstructivePulmonaryDisease">
         <Criteria>
           <ConvergenceTime readOnly="false" unit="s" value="15"/>
           <MinimumReactionTime readOnly="false" unit="s" value="25"/>
           <MaximumAllowedStabilizationTime readOnly="false" unit="s" value="1000"/>
+          <PropertyConvergence Name="HeartRate" PercentDifference="NaN"/>
+          <PropertyConvergence Name="CardiacOutput" PercentDifference="NaN"/>
+          <PropertyConvergence Name="DiastolicArterialPressure" PercentDifference="NaN"/>
+          <PropertyConvergence Name="SystolicArterialPressure" PercentDifference="NaN"/>
+          <PropertyConvergence Name="TidalVolume" PercentDifference="NaN"/>
+          <PropertyConvergence Name="OxygenSaturation" PercentDifference="NaN"/>
+          <PropertyConvergence Name="EndTidalCarbonDioxideFraction" PercentDifference="NaN"/>
+          <PropertyConvergence Name="LeftAfferentArterioleResistance" PercentDifference="NaN"/>
+          <PropertyConvergence Name="RightAfferentArterioleResistance" PercentDifference="NaN"/>
+          <PropertyConvergence Name="CoreTemperature" PercentDifference="NaN"/>
+          <PropertyConvergence Name="SkinTemperature" PercentDifference="NaN"/>
+        </Criteria>
+      </ConditionStabilization>
+      <ConditionStabilization Name="DiabetesType1">
+        <Criteria>
+          <ConvergenceTime readOnly="false" unit="s" value="15"/>
+          <MinimumReactionTime readOnly="false" unit="s" value="25"/>
+          <MaximumAllowedStabilizationTime readOnly="false" unit="s" value="1000"/>
+          <PropertyConvergence Name="HeartRate" PercentDifference="NaN"/>
+          <PropertyConvergence Name="CardiacOutput" PercentDifference="NaN"/>
+          <PropertyConvergence Name="DiastolicArterialPressure" PercentDifference="NaN"/>
+          <PropertyConvergence Name="SystolicArterialPressure" PercentDifference="NaN"/>
+          <PropertyConvergence Name="TidalVolume" PercentDifference="NaN"/>
+          <PropertyConvergence Name="OxygenSaturation" PercentDifference="NaN"/>
+          <PropertyConvergence Name="EndTidalCarbonDioxideFraction" PercentDifference="NaN"/>
+          <PropertyConvergence Name="LeftAfferentArterioleResistance" PercentDifference="NaN"/>
+          <PropertyConvergence Name="RightAfferentArterioleResistance" PercentDifference="NaN"/>
+          <PropertyConvergence Name="CoreTemperature" PercentDifference="NaN"/>
+          <PropertyConvergence Name="SkinTemperature" PercentDifference="NaN"/>
+        </Criteria>
+      </ConditionStabilization>
+      <ConditionStabilization Name="DiabetesType2">
+        <Criteria>
+          <ConvergenceTime readOnly="false" unit="s" value="15"/>
+          <MinimumReactionTime readOnly="false" unit="s" value="25"/>
+          <MaximumAllowedStabilizationTime readOnly="false" unit="s" value="1000"/>
+          <PropertyConvergence Name="HeartRate" PercentDifference="NaN"/>
+          <PropertyConvergence Name="CardiacOutput" PercentDifference="NaN"/>
+          <PropertyConvergence Name="DiastolicArterialPressure" PercentDifference="NaN"/>
+          <PropertyConvergence Name="SystolicArterialPressure" PercentDifference="NaN"/>
+          <PropertyConvergence Name="TidalVolume" PercentDifference="NaN"/>
+          <PropertyConvergence Name="OxygenSaturation" PercentDifference="NaN"/>
+          <PropertyConvergence Name="EndTidalCarbonDioxideFraction" PercentDifference="NaN"/>
+          <PropertyConvergence Name="LeftAfferentArterioleResistance" PercentDifference="NaN"/>
+          <PropertyConvergence Name="RightAfferentArterioleResistance" PercentDifference="NaN"/>
+          <PropertyConvergence Name="CoreTemperature" PercentDifference="NaN"/>
+          <PropertyConvergence Name="SkinTemperature" PercentDifference="NaN"/>
+        </Criteria>
+      </ConditionStabilization>
+      <ConditionStabilization Name="ChronicAnemia">
+        <Criteria>
+          <ConvergenceTime readOnly="false" unit="s" value="15"/>
+          <MinimumReactionTime readOnly="false" unit="s" value="25"/>
+          <MaximumAllowedStabilizationTime readOnly="false" unit="s" value="1000"/>
+          <PropertyConvergence Name="HeartRate" PercentDifference="NaN"/>
+          <PropertyConvergence Name="CardiacOutput" PercentDifference="NaN"/>
+          <PropertyConvergence Name="DiastolicArterialPressure" PercentDifference="NaN"/>
+          <PropertyConvergence Name="SystolicArterialPressure" PercentDifference="NaN"/>
+          <PropertyConvergence Name="TidalVolume" PercentDifference="NaN"/>
+          <PropertyConvergence Name="OxygenSaturation" PercentDifference="NaN"/>
+          <PropertyConvergence Name="EndTidalCarbonDioxideFraction" PercentDifference="NaN"/>
+          <PropertyConvergence Name="LeftAfferentArterioleResistance" PercentDifference="NaN"/>
+          <PropertyConvergence Name="RightAfferentArterioleResistance" PercentDifference="NaN"/>
+          <PropertyConvergence Name="CoreTemperature" PercentDifference="NaN"/>
+          <PropertyConvergence Name="SkinTemperature" PercentDifference="NaN"/>
+        </Criteria>
+      </ConditionStabilization>
+      <ConditionStabilization Name="Dehydration">
+        <Criteria>
+          <ConvergenceTime readOnly="false" unit="s" value="15"/>
+          <MinimumReactionTime readOnly="false" unit="s" value="25"/>
+          <MaximumAllowedStabilizationTime readOnly="false" unit="s" value="2000"/>
           <PropertyConvergence Name="HeartRate" PercentDifference="NaN"/>
           <PropertyConvergence Name="CardiacOutput" PercentDifference="NaN"/>
           <PropertyConvergence Name="DiastolicArterialPressure" PercentDifference="NaN"/>
@@ -29053,96 +29152,6 @@
         </Criteria>
       </ConditionStabilization>
       <ConditionStabilization Name="ChronicRenalStenosis">
-        <Criteria>
-          <ConvergenceTime readOnly="false" unit="s" value="15"/>
-          <MinimumReactionTime readOnly="false" unit="s" value="25"/>
-          <MaximumAllowedStabilizationTime readOnly="false" unit="s" value="1000"/>
-          <PropertyConvergence Name="HeartRate" PercentDifference="NaN"/>
-          <PropertyConvergence Name="CardiacOutput" PercentDifference="NaN"/>
-          <PropertyConvergence Name="DiastolicArterialPressure" PercentDifference="NaN"/>
-          <PropertyConvergence Name="SystolicArterialPressure" PercentDifference="NaN"/>
-          <PropertyConvergence Name="TidalVolume" PercentDifference="NaN"/>
-          <PropertyConvergence Name="OxygenSaturation" PercentDifference="NaN"/>
-          <PropertyConvergence Name="EndTidalCarbonDioxideFraction" PercentDifference="NaN"/>
-          <PropertyConvergence Name="LeftAfferentArterioleResistance" PercentDifference="NaN"/>
-          <PropertyConvergence Name="RightAfferentArterioleResistance" PercentDifference="NaN"/>
-          <PropertyConvergence Name="CoreTemperature" PercentDifference="NaN"/>
-          <PropertyConvergence Name="SkinTemperature" PercentDifference="NaN"/>
-        </Criteria>
-      </ConditionStabilization>
-      <ConditionStabilization Name="ImpairedAlveolarExchange">
-        <Criteria>
-          <ConvergenceTime readOnly="false" unit="s" value="15"/>
-          <MinimumReactionTime readOnly="false" unit="s" value="25"/>
-          <MaximumAllowedStabilizationTime readOnly="false" unit="s" value="1000"/>
-          <PropertyConvergence Name="HeartRate" PercentDifference="NaN"/>
-          <PropertyConvergence Name="CardiacOutput" PercentDifference="NaN"/>
-          <PropertyConvergence Name="DiastolicArterialPressure" PercentDifference="NaN"/>
-          <PropertyConvergence Name="SystolicArterialPressure" PercentDifference="NaN"/>
-          <PropertyConvergence Name="TidalVolume" PercentDifference="NaN"/>
-          <PropertyConvergence Name="OxygenSaturation" PercentDifference="NaN"/>
-          <PropertyConvergence Name="EndTidalCarbonDioxideFraction" PercentDifference="NaN"/>
-          <PropertyConvergence Name="LeftAfferentArterioleResistance" PercentDifference="NaN"/>
-          <PropertyConvergence Name="RightAfferentArterioleResistance" PercentDifference="NaN"/>
-          <PropertyConvergence Name="CoreTemperature" PercentDifference="NaN"/>
-          <PropertyConvergence Name="SkinTemperature" PercentDifference="NaN"/>
-        </Criteria>
-      </ConditionStabilization>
-      <ConditionStabilization Name="Dehydration">
-        <Criteria>
-          <ConvergenceTime readOnly="false" unit="s" value="15"/>
-          <MinimumReactionTime readOnly="false" unit="s" value="25"/>
-          <MaximumAllowedStabilizationTime readOnly="false" unit="s" value="2000"/>
-          <PropertyConvergence Name="HeartRate" PercentDifference="NaN"/>
-          <PropertyConvergence Name="CardiacOutput" PercentDifference="NaN"/>
-          <PropertyConvergence Name="DiastolicArterialPressure" PercentDifference="NaN"/>
-          <PropertyConvergence Name="SystolicArterialPressure" PercentDifference="NaN"/>
-          <PropertyConvergence Name="TidalVolume" PercentDifference="NaN"/>
-          <PropertyConvergence Name="OxygenSaturation" PercentDifference="NaN"/>
-          <PropertyConvergence Name="EndTidalCarbonDioxideFraction" PercentDifference="NaN"/>
-          <PropertyConvergence Name="LeftAfferentArterioleResistance" PercentDifference="NaN"/>
-          <PropertyConvergence Name="RightAfferentArterioleResistance" PercentDifference="NaN"/>
-          <PropertyConvergence Name="CoreTemperature" PercentDifference="NaN"/>
-          <PropertyConvergence Name="SkinTemperature" PercentDifference="NaN"/>
-        </Criteria>
-      </ConditionStabilization>
-      <ConditionStabilization Name="Starvation">
-        <Criteria>
-          <ConvergenceTime readOnly="false" unit="s" value="15"/>
-          <MinimumReactionTime readOnly="false" unit="s" value="25"/>
-          <MaximumAllowedStabilizationTime readOnly="false" unit="s" value="1000"/>
-          <PropertyConvergence Name="HeartRate" PercentDifference="NaN"/>
-          <PropertyConvergence Name="CardiacOutput" PercentDifference="NaN"/>
-          <PropertyConvergence Name="DiastolicArterialPressure" PercentDifference="NaN"/>
-          <PropertyConvergence Name="SystolicArterialPressure" PercentDifference="NaN"/>
-          <PropertyConvergence Name="TidalVolume" PercentDifference="NaN"/>
-          <PropertyConvergence Name="OxygenSaturation" PercentDifference="NaN"/>
-          <PropertyConvergence Name="EndTidalCarbonDioxideFraction" PercentDifference="NaN"/>
-          <PropertyConvergence Name="LeftAfferentArterioleResistance" PercentDifference="NaN"/>
-          <PropertyConvergence Name="RightAfferentArterioleResistance" PercentDifference="NaN"/>
-          <PropertyConvergence Name="CoreTemperature" PercentDifference="NaN"/>
-          <PropertyConvergence Name="SkinTemperature" PercentDifference="NaN"/>
-        </Criteria>
-      </ConditionStabilization>
-      <ConditionStabilization Name="DiabetesType1">
-        <Criteria>
-          <ConvergenceTime readOnly="false" unit="s" value="15"/>
-          <MinimumReactionTime readOnly="false" unit="s" value="25"/>
-          <MaximumAllowedStabilizationTime readOnly="false" unit="s" value="1000"/>
-          <PropertyConvergence Name="HeartRate" PercentDifference="NaN"/>
-          <PropertyConvergence Name="CardiacOutput" PercentDifference="NaN"/>
-          <PropertyConvergence Name="DiastolicArterialPressure" PercentDifference="NaN"/>
-          <PropertyConvergence Name="SystolicArterialPressure" PercentDifference="NaN"/>
-          <PropertyConvergence Name="TidalVolume" PercentDifference="NaN"/>
-          <PropertyConvergence Name="OxygenSaturation" PercentDifference="NaN"/>
-          <PropertyConvergence Name="EndTidalCarbonDioxideFraction" PercentDifference="NaN"/>
-          <PropertyConvergence Name="LeftAfferentArterioleResistance" PercentDifference="NaN"/>
-          <PropertyConvergence Name="RightAfferentArterioleResistance" PercentDifference="NaN"/>
-          <PropertyConvergence Name="CoreTemperature" PercentDifference="NaN"/>
-          <PropertyConvergence Name="SkinTemperature" PercentDifference="NaN"/>
-        </Criteria>
-      </ConditionStabilization>
-      <ConditionStabilization Name="DiabetesType2">
         <Criteria>
           <ConvergenceTime readOnly="false" unit="s" value="15"/>
           <MinimumReactionTime readOnly="false" unit="s" value="25"/>

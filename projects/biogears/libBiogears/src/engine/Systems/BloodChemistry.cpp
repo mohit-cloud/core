@@ -295,23 +295,18 @@ void BloodChemistry::Process()
     GetPulseOximetry().Set(GetOxygenSaturation());
   }
 
-  // This Hemoglobin Content is the mass of the hemoglobin only, not the hemoglobin and bound gas.
-  // So we have to take our 4 Hb species masses and remove the mass of the gas.
-  // Step 1) Get the mass of the bound species, which includes the mass of the bound gas.
-  // Step 2) Convert to moles using the molar weight of the bound species (molar mass of bound species includes the mass of the bound gas and the mass of the unbound species).
-  // Step 3) Covert moles of the bound species to moles of the unbound species. i.e.multiply by 1 (this step is implied)
-  // Step 4) Convert moles of the unbound species to mass in order to get a total mass of hemoglobin (as opposed to a total mass of hemoglobin plus the bound gases).
+  //We are tracking totalHb as all hemoglobin, regardless of whether it is bound or not.  HbO2 and HbCO2 represent the amounts of **bound** O2 and CO2, respectively.
+  //Thus, we are not tracking distinct Hb species--but that is because we do not have to.  The most important valus to the saturation model are bound gas concentration
+  //and total Hb is most important for blood chemistry.
   double totalHb_g = m_data.GetSubstances().GetSubstanceMass(m_data.GetSubstances().GetHb(), m_data.GetCompartments().GetVascularLeafCompartments(), MassUnit::g);
   double totalHbO2_g = (m_data.GetSubstances().GetSubstanceMass(m_data.GetSubstances().GetHbO2(), m_data.GetCompartments().GetVascularLeafCompartments(), MassUnit::g) / m_data.GetSubstances().GetHbO2().GetMolarMass(MassPerAmountUnit::g_Per_mol)) * m_data.GetSubstances().GetHb().GetMolarMass(MassPerAmountUnit::g_Per_mol);
   double totalHbCO2_g = (m_data.GetSubstances().GetSubstanceMass(m_data.GetSubstances().GetHbCO2(), m_data.GetCompartments().GetVascularLeafCompartments(), MassUnit::g) / m_data.GetSubstances().GetHbCO2().GetMolarMass(MassPerAmountUnit::g_Per_mol)) * m_data.GetSubstances().GetHb().GetMolarMass(MassPerAmountUnit::g_Per_mol);
-  double totalHBO2CO2_g = (m_data.GetSubstances().GetSubstanceMass(m_data.GetSubstances().GetHbO2CO2(), m_data.GetCompartments().GetVascularLeafCompartments(), MassUnit::g) / m_data.GetSubstances().GetHbO2CO2().GetMolarMass(MassPerAmountUnit::g_Per_mol)) * m_data.GetSubstances().GetHb().GetMolarMass(MassPerAmountUnit::g_Per_mol);
   double totalHBCO_g = 0.0;
   if (m_aortaCO != nullptr)
     totalHBCO_g = (m_data.GetSubstances().GetSubstanceMass(m_data.GetSubstances().GetHbCO(), m_data.GetCompartments().GetVascularLeafCompartments(), MassUnit::g) / m_data.GetSubstances().GetHbCO().GetMolarMass(MassPerAmountUnit::g_Per_mol)) * m_data.GetSubstances().GetHb().GetMolarMass(MassPerAmountUnit::g_Per_mol);
 
-  double totalHemoglobinO2Hemoglobin_g = totalHb_g + totalHbO2_g + totalHbCO2_g + totalHBO2CO2_g + totalHBCO_g;
-  GetHemoglobinContent().SetValue(totalHemoglobinO2Hemoglobin_g, MassUnit::g);
-  if (totalHemoglobinO2Hemoglobin_g < (13.0 * m_data.GetPatient().GetBloodVolumeBaseline(VolumeUnit::dL))) {
+  GetHemoglobinContent().SetValue(totalHb_g, MassUnit::g);
+  if (totalHb_g < (13.0 * m_data.GetPatient().GetBloodVolumeBaseline(VolumeUnit::dL))) {
     // 13.5 g/dL is considered low Hb content
     double hemoglobinIncrease_g = (0.63 / 86400.0) * m_data.GetTimeStep().GetValue(TimeUnit::s); //0.63 g Hb per day (in seconds is 86400)
     m_venaCava->GetSubstanceQuantity(m_data.GetSubstances().GetHb())->GetMass().IncrementValue(hemoglobinIncrease_g, MassUnit::g);
@@ -355,7 +350,7 @@ void BloodChemistry::Process()
   m_data.GetSubstances().GetGlobulin().GetBloodConcentration().SetValue(albuminConcentration_ug_Per_mL * 1.6 - albuminConcentration_ug_Per_mL, MassPerVolumeUnit::ug_Per_mL); // 1.6 comes from reading http://www.drkaslow.com/html/proteins_-_albumin-_globulins-_etc.html
   m_data.GetSubstances().GetGlucagon().GetBloodConcentration().Set(m_venaCavaGlucagon->GetConcentration());
   m_data.GetSubstances().GetGlucose().GetBloodConcentration().Set(m_venaCavaGlucose->GetConcentration());
-  double HemoglobinConcentration = totalHemoglobinO2Hemoglobin_g / TotalBloodVolume_mL;
+  double HemoglobinConcentration = totalHb_g / TotalBloodVolume_mL;
   m_data.GetSubstances().GetHb().GetBloodConcentration().SetValue(HemoglobinConcentration, MassPerVolumeUnit::g_Per_mL);
   m_data.GetSubstances().GetInsulin().GetBloodConcentration().Set(m_venaCavaInsulin->GetConcentration());
   m_data.GetSubstances().GetKetones().GetBloodConcentration().Set(m_venaCavaKetones->GetConcentration());

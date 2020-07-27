@@ -54,7 +54,7 @@ public:
   void CalculateCarbonMonoxideSpeciesDistribution(SELiquidCompartment& cmpt);
 
 protected: // Stewart Model + Dash-Bassingthwaighte Model + Henderson-Hasselbach Model
-  void CalculateHemoglobinSaturations(double O2PartialPressureGuess_mmHg, double CO2PartialPressureGuess_mmHg, double pH, double temperature_C, double hematocrit, double& OxygenSaturation, double& CarbonDioxideSaturation, double CO2_scaling_factor);
+  void CalculateHemoglobinSaturations(double O2PartialPressureGuess_mmHg, double CO2PartialPressureGuess_mmHg, double pH, double temperature_C, double hematocrit, double& OxygenSaturation, double& CarbonDioxideSaturation, double& BicarbonateBloodConcentration, double CO2_scaling_factor);
 
   // All properties are stateless and are set by either the Initialize method or SetBodyState method
   SESubstance* m_O2;
@@ -89,6 +89,7 @@ protected: // Stewart Model + Dash-Bassingthwaighte Model + Henderson-Hasselbach
   double m_albumin_g_per_L;
   double m_hematocrit;
   double m_temperature_C;
+  double m_bicarbonate_plasma_mmol_Per_L;
   // Here is the stuff that will need to go into the CDM
   double m_StrongIonDifference_mmol_Per_L; // BloodChemistrySystemData mmol/L
   double m_Phosphate_mmol_Per_L; //BloodChemistryData mmol/L

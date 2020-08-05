@@ -497,7 +497,7 @@ void BioGearsSubstances::InitializeLiquidCompartmentNonGases()
   subQ->Balance(BalanceLiquidBy::Concentration);
 
   // CHLORIDE //
-  concentration.SetValue(1.2*0.362, MassPerVolumeUnit::g_Per_dL);
+  concentration.SetValue(0.362, MassPerVolumeUnit::g_Per_dL);
   SetSubstanceConcentration(*m_chloride, vascular, concentration);
   SetSubstanceConcentration(*m_chloride, urine, concentration);
   // Tissue

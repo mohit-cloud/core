@@ -1981,11 +1981,18 @@ void Cardiovascular::TuneCircuit()
       c->Balance(BalanceLiquidBy::Concentration);
     }
     SELiquidCompartment* extra;
+    SELiquidCompartment* intra;
     for (SETissueCompartment* c : m_data.GetCompartments().GetTissueCompartments()) {
       extra = &m_data.GetCompartments().GetExtracellularFluid(*c);
       if (!extra->HasVolume())
         continue;
       extra->Balance(BalanceLiquidBy::Concentration);
+    }
+    for (SETissueCompartment* c : m_data.GetCompartments().GetTissueCompartments()) {
+      intra = &m_data.GetCompartments().GetIntracellularFluid(*c);
+      if (!intra->HasVolume())
+        continue;
+      intra->Balance(BalanceLiquidBy::Concentration);
     }
     m_patient->GetHeartRateBaseline().Set(GetHeartRate());
     m_patient->GetDiastolicArterialPressureBaseline().Set(GetDiastolicArterialPressure());

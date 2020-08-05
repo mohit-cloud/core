@@ -1665,6 +1665,11 @@ void Tissue::ManageSubstancesAndSaturation()
       m_data.GetSaturationCalculator().CalculateBloodGasDistribution(*cmpt);
     }
   }
+  int steps = static_cast<int>(m_data.GetSimulationTime().GetValue(TimeUnit::s) / m_Dt_s);
+  if (steps % (50 * 60 * 5) == 0 && m_data.GetState()>=EngineState::AtSecondaryStableState) {
+    m_data.GetSubstances().WriteBloodGases();
+    m_data.GetSubstances().WritePulmonaryGases();
+  }
 }
 
 //--------------------------------------------------------------------------------------------------

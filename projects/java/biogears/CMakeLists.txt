@@ -120,15 +120,15 @@ genClasspath(java_classpath
         ${PROJECT_BINARY_DIR}/runtime/jar/jdom-2.0.2.jar
         ${PROJECT_BINARY_DIR}/runtime/jar/javax.mail-1.6.1.jar
     )
-set (allocation_args "-Xms64M" "-Xmx1G" "-Xmn64M" "-Xss4m")
+set (allocation_args "-Xms64M" "-Xmx1G" "-Xmn64M" "-Xss4m" "-Djava.awt.headless=true")
 if(Biogears_BUILD_WEBSITE)
   add_custom_target(docs-prepare
         COMMAND ${Java_JAVA_EXECUTABLE} ${allocation_args} -classpath "${java_classpath}"  mil.tatrc.physiology.datamodel.doxygen.CDM2MD #cdm
         COMMAND ${Java_JAVA_EXECUTABLE} ${allocation_args} -classpath "${java_classpath}"  mil.tatrc.physiology.datamodel.doxygen.DoxygenPreprocessor  doc/markdown doc/doxygen/processed_md #cdm
         COMMAND ${Java_JAVA_EXECUTABLE} ${allocation_args} -classpath "${java_classpath}"  mil.tatrc.physiology.datamodel.doxygen.DoxygenPreprocessor  doc/methodology doc/doxygen/processed_md #cdm
         COMMAND ${Java_JAVA_EXECUTABLE} ${allocation_args} -classpath "${java_classpath}"  mil.tatrc.physiology.datamodel.doxygen.XSDToDoxygen xsd/BioGearsDataModel.xsd doc/doxygen/processed_md/xsd.ixx #cdm
-        #COMMAND ${Java_JAVA_EXECUTABLE} ${allocation_args} -classpath "${java_classpath}"  mil.tatrc.physiology.utilities.csv.plots.PlotDriver PlotRunJava-1_2.config
-        #COMMAND ${Java_JAVA_EXECUTABLE} ${allocation_args} -classpath "${java_classpath}"  mil.tatrc.physiology.utilities.csv.plots.PlotDriver PlotRunJava-2_2.config 
+        COMMAND ${Java_JAVA_EXECUTABLE} ${allocation_args} -classpath "${java_classpath}"  mil.tatrc.physiology.utilities.csv.plots.PlotDriver PlotRunJava-1_2.config
+        COMMAND ${Java_JAVA_EXECUTABLE} ${allocation_args} -classpath "${java_classpath}"  mil.tatrc.physiology.utilities.csv.plots.PlotDriver PlotRunJava-2_2.config 
         WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/runtime
         VERBATIM
         USES_TERMINAL
@@ -141,6 +141,10 @@ if(Biogears_BUILD_WEBSITE)
   )
 
   add_custom_target(docs-stage
+        COMMAND ${CMAKE_COMMAND} -E  make_directory ../validation
+        COMMAND ${CMAKE_COMMAND} -E  make_directory ../baselines
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ../../../share/website/validation ../validation
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ../../../share/website/baselines ../baselines
         COMMAND ${CMAKE_COMMAND} -E  make_directory output/documentation
         COMMAND  ${CMAKE_COMMAND} -E copy_directory doxygen/html/ output/documentation
         COMMAND  ${CMAKE_COMMAND} -E tar cz output/documentation.zip     output/documentation
@@ -161,7 +165,7 @@ if(Biogears_BUILD_WEBSITE)
         VERBATIM
         USES_TERMINAL
     )
-    add_custom_target(docs-prepare=preprocess-methodolgy
+    add_custom_target(docs-prepare-preprocess-methodolgy
         COMMAND ${Java_JAVA_EXECUTABLE} ${allocation_args} -classpath "${java_classpath}"  mil.tatrc.physiology.datamodel.doxygen.DoxygenPreprocessor  doc/methodology doc/doxygen/processed_md #cdm
         WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/runtime
         VERBATIM

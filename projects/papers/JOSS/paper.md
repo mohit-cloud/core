@@ -1,68 +1,113 @@
 ---
-title: 'Gala: A Python package for galactic dynamics'
+title: 'BioGears: Real-time human physiology'
 tags:
-  - Python
-  - astronomy
-  - dynamics
-  - galactic dynamics
-  - milky way
+  - C++
+  - Physiology
+  - lumped paramater
+  - Medical
 authors:
-  - name: Adrian M. Price-Whelan^[Custom footnotes for e.g. denoting who the corresponding author is can be included like this.]
-    orcid: 0000-0003-0872-7098
-    affiliation: "1, 2" # (Multiple affiliations must be quoted)
-  - name: Author Without ORCID
-    affiliation: 2
-  - name: Author with no affiliation
-    affiliation: 3
+  - name: Steven A. White, Ph.D
+    orcid: 0000-0001-9598-6439
+    affiliation: 1
+  - name: Austin Baird, Ph.D
+    orcid: 0000-0002-4711-3016
+    affiliation: 1
+  - name: Matthew McDaniel
+    affiliation: 1
+    - name: Nathan Tatum
+    affiliation: 1
+    - name: Lucas Marin
+    affiliation: 1
 affiliations:
- - name: Lyman Spitzer, Jr. Fellow, Princeton University
+ - name: Advanced Research Associates
    index: 1
- - name: Institution Name
-   index: 2
- - name: Independent Researcher
-   index: 3
-date: 13 August 2017
-bibliography: paper.bib
-
-
+date: 26 August 2020
+bibliography: BioGears.bib
 ---
 
-# Summary
+# Summery
 
-The forces on stars, galaxies, and dark matter under external gravitational
-fields lead to the dynamical evolution of structures in the universe. The orbits
-of these bodies are therefore key to understanding the formation, history, and
-future state of galaxies. The field of "galactic dynamics," which aims to model
-the gravitating components of galaxies to study their structure and evolution,
-is now well-established, commonly taught, and frequently used in astronomy.
-Aside from toy problems and demonstrations, the majority of problems require
-efficient numerical tools, many of which require the same base code (e.g., for
-performing numerical orbit integration).
+BioGears is an open source, extensible human physiology computational engine that is designed and constructed to enhance medical education, research, and training technologies. BioGears is primarily written in C++ and uses an electric circuit analog to characterize the fluid dynamics of the cardiopulmonary system. As medical training and requirements become more complex, there is a need to supplement traditional simulators with physiology simulations. To this end, BioGears provides an extensive number of validated injury models and related interventions that may be applied to the simulated patient. In addition, BioGears compiled libraries may be used for computational medical research to construct *in-silico* clinical trials related to patient treatment and outcomes. Patients may be constructed as inputs to the simulation allowing diversity and specificity for a  given application. The engine can be used standalone or integrated with simulators, sensor interfaces, and models of all fidelities. The Library, and all associated projects, are published under the Apache 2.0 license and is made available through the public GitHub repository. BioGears aims to lower the barrier to create complex physiological simulations for a variety of uses and requirements.
 
 # Statement of need 
 
-`Gala` is an Astropy-affiliated Python package for galactic dynamics. Python
-enables wrapping low-level languages (e.g., C) for speed without losing
-flexibility or ease-of-use in the user-interface. The API for `Gala` was
-designed to provide a class-based and user-friendly interface to fast (C or
-Cython-optimized) implementations of common operations such as gravitational
-potential and force evaluation, orbit integration, dynamical transformations,
-and chaos indicators for nonlinear dynamics. `Gala` also relies heavily on and
-interfaces well with the implementations of physical units and astronomical
-coordinate systems in the `Astropy` package [@astropy] (`astropy.units` and
-`astropy.coordinates`).
+Medical simulation and computational medicine are two fields that are gowning in application diversity and complexity [@sweet2017crest]. Simple CPR manikins are now being replaced with complex robotic systems that can simulate breathing and react to the performance of the trainee. As these systems use-cases grow there is a requirement that they be supplemented with accurate validated physiology. BioGears fills this need by providing a free computational framework to use as a backbone to many of these robotic training manikins and may support other computational medicine research applications. The BioGears project aims to better democratize the construction of high-fidelity medical training by providing a sophisticated, complex physiology engine to developers that is easy to integrate and free to use.
 
-`Gala` was designed to be used by both astronomical researchers and by
-students in courses on gravitational dynamics or astronomy. It has already been
-used in a number of scientific publications [@Pearson:2017] and has also been
-used in graduate courses on Galactic dynamics to, e.g., provide interactive
-visualizations of textbook material [@Binney:2008]. The combination of speed,
-design, and support for Astropy functionality in `Gala` will enable exciting
-scientific explorations of forthcoming data releases from the *Gaia* mission
-[@gaia] by students and experts alike.
+BioGears builds on prior success simulating cardiopulomary dynamics [@otto1899grundform][@westerhof2009arterial] by creating a lumped circuit model of the patients circulation and respiration. BioGears implements various models of diffusion and substance transport to properly simulate the gas/blood interface in the lungs. To handle more complex models of physiology, such as pharmacological models, BioGears constructs a set of hierarchal compartments built on top of the circuit analogs. Top most compartments represents system level data, such as the liver, with sub-compartments representing more granular biology of the patient such as the nephron, extravascular tissue, and even intra cellular spaces. A generic data request framework, leveraging XML, is used to access various substance, fluid, thermal, and gas information for a specific compartment of the body. 
 
-# Mathematics
+The complexity and robustness of the BioGears engine provides application that include computational medicine research by extending the engine to support models of sepsis [@mcdaniel2019whole], burn [@mcdaniel2019full], surgical planning  [@potter2017physiology], and pharamacological kinetics and clearance [@mcdaniel2019open]. New dugs can be implemented in BioGears by filling in the appropriate physiochemical properties in the provided XML format. The BioGears engine handles computation of clearance, tissue diffusion, and patient responses based on this file and doesn't require additional C++ programming by the user. 
 
+
+
+# Features
+The BioGears engine, once compiled provides a set of libraries that may be included in any application that wishes to leverage a physiological simulation of a patient. In addition, BioGears provides build support and testing for all major user platforms (MacOS, Windows, Linux, and ARM). An instance of a BioGears engine models a single patient's physiology and can be edited at the start of runtime or during the simulation, in the following ways: 
+
+- The patient is defined by parameters, such as height, weight, systolic and diastolic pressure.
+- You can initialize the patient with specific chronic and/or disease states via conditions.
+- You can modify the patients external environmental conditions (weather, submerge in water, etc.)
+- You can apply various actions (acute insults/injuries, interventions, conscious breathing, exercise, etc.) to be applied to the patient.
+- The patient can also interact with equipment models, such as an Anesthesia and/or an ECG Machine as well as an Inhaler via the action framework.
+
+Constructing a pointer to an engine and loading a patient is easy and can be done in only a few lines of code:
+
+Fenced code blocks are rendered with syntax highlighting:
+```C++
+// Include the various types you will be using in your code
+#include <biogears/cdm/compartment/SECompartmentManager.h>
+#include <biogears/cdm/engine/PhysiologyEngineTrack.h>
+#include <biogears/cdm/patient/SEPatient.h>
+#include <biogears/cdm/properties/SEScalarTypes.h>
+#include <biogears/cdm/substance/SESubstanceManager.h>
+
+using namespace biogears;
+//--------------------------------------------------------------------------------------------------
+/// \brief
+/// Demonstrates how to set concentrations of ionic compounds in bloodstream and tissue and call events
+/// based on changes in concentrations
+///
+/// \details
+/// Refer to the SEEnvironmentChange class
+/// Refer to the SEDrug Class
+//--------------------------------------------------------------------------------------------------
+
+void HowToFaciculation()
+{
+  // Create the engine and load the patient
+  std::unique_ptr<PhysiologyEngine> bg = CreateBioGearsEngine("HowToFasciculation.log");
+  bg->GetLogger()->Info("HowToFasciculation");
+
+  if (!bg->LoadState("./states/StandardMale@0s.xml")) {
+    bg->GetLogger()->Error("Could not load state, check the error");
+    return;
+  }
+``` 
+
+A tracker class can then be implemented and data requests logged by the user
+
+```C++
+ // The tracker is responsible for advancing the engine time and outputting the data requests below at each time step
+  HowToTracker tracker(*bg);
+
+  bg->GetEngineTrack()->GetDataRequestManager().CreateLiquidCompartmentDataRequest().Set("VenaCava", *Na, "Molarity", AmountPerVolumeUnit::mmol_Per_L);
+
+  bg->GetEngineTrack()->GetDataRequestManager().SetResultsFilename("HowToFasciculation.csv");
+
+  // Advance some time to get some resting data
+  tracker.AdvanceModelTime(60);
+``` 
+
+Injuries models can be constructed during runtime and pushed to the engine in a few lines
+
+```C++
+  // Create an SEAirwayObstruction object
+  // Set the obstruction severity (a fraction between 0 and 1. For a complete obstruction use 1.) 
+  SEAirwayObstruction obstruction;
+  obstruction.GetSeverity().SetValue(0.6);
+  bg->ProcessAction(obstruction);
+  bg->GetLogger()->Info("Giving the patient an airway obstruction.");
+``` 
+
+Other examples and use cases can be found in our HowTo functions that we provide to the community as a reference. 
 
 # Citations
 
@@ -71,11 +116,7 @@ scientific explorations of forthcoming data releases from the *Gaia* mission
 
 Figures can be included like this:
 
-Fenced code blocks are rendered with syntax highlighting:
-```python
-for n in range(10):
-    yield f(n)
-```	
+
 
 # Acknowledgements
 

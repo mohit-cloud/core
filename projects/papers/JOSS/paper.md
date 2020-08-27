@@ -1,31 +1,31 @@
 ---
-title: 'Gala: A Python package for galactic dynamics'
+title: 'BioGears: A C++ library for whole body physiology simulations'
 tags:
-  - Python
-  - astronomy
-  - dynamics
-  - galactic dynamics
-  - milky way
+  - C++
+  - physiology
+  - medicine
+  - biology
+  - pharmacology
 authors:
-  - name: Adrian M. Price-Whelan^[Custom footnotes for e.g. denoting who the corresponding author is can be included like this.]
-    orcid: 0000-0003-0872-7098
-    affiliation: "1, 2" # (Multiple affiliations must be quoted)
-  - name: Author Without ORCID
-    affiliation: 2
-  - name: Author with no affiliation
-    affiliation: 3
+  - name: Austin Baird^[Custom footnotes for e.g. denoting who the corresponding author is can be included like this.]
+    orcid: 0000-0002-4711-3016
+    affiliation: 1
+  - name: Matthew McDaniel
+    affiliation: 1
+    - name: Steven A. White
+    affiliation: 1
+    - name: Nathan Tatum
+    affiliation: 1
+    - name: Lucas Marin
+    affiliation: 1
 affiliations:
- - name: Lyman Spitzer, Jr. Fellow, Princeton University
+ - name: Applied Research Associates, Inc. Advanced Modeling and Simulation Systems Directorate
    index: 1
- - name: Institution Name
-   index: 2
- - name: Independent Researcher
-   index: 3
-date: 13 August 2017
+date: 27 August 2020
 bibliography: paper.bib
 ---
 
-# Summery
+# Summary
 
 BioGears is an open source, extensible human physiology computational engine that is designed and constructed to enhance medical education, research, and training technologies. BioGears is primarily written in C++ and uses an electric circuit analog to characterize the fluid dynamics of the cardiopulmonary system. As medical training and requirements become more complex, there is a need to supplement traditional simulators with physiology simulations. To this end, BioGears provides an extensive number of validated injury models and related interventions that may be applied to the simulated patient. In addition, BioGears compiled libraries may be used for computational medical research to construct *in-silico* clinical trials related to patient treatment and outcomes. Patients may be constructed as inputs to the simulation allowing diversity and specificity for a  given application. The engine can be used standalone or integrated with simulators, sensor interfaces, and models of all fidelities. The Library, and all associated projects, are published under the Apache 2.0 license and is made available through the public GitHub repository. BioGears aims to lower the barrier to create complex physiological simulations for a variety of uses and requirements.
 
@@ -54,7 +54,6 @@ Constructing a pointer to an engine and loading a patient is easy and can be don
 Fenced code blocks are rendered with syntax highlighting:
 ```C++
 #include "HowToTracker.h"
-// Include the various types you will be using in your code
 #include <biogears/cdm/compartment/SECompartmentManager.h>
 #include <biogears/cdm/engine/PhysiologyEngineTrack.h>
 #include <biogears/cdm/patient/SEPatient.h>
@@ -62,16 +61,6 @@ Fenced code blocks are rendered with syntax highlighting:
 #include <biogears/cdm/substance/SESubstanceManager.h>
 
 using namespace biogears;
-//--------------------------------------------------------------------------------------------------
-/// \brief
-/// Demonstrates how to set concentrations of ionic compounds in bloodstream and tissue and call events
-/// based on changes in concentrations
-///
-/// \details
-/// Refer to the SEEnvironmentChange class
-/// Refer to the SEDrug Class
-//--------------------------------------------------------------------------------------------------
-
 void HowToFaciculation()
 {
   // Create the engine and load the patient
@@ -89,11 +78,8 @@ A tracker class can then be implemented and data requests logged by the user
 ```C++
  // The tracker is responsible for advancing the engine time and outputting the data requests below at each time step
   HowToTracker tracker(*bg);
-
   bg->GetEngineTrack()->GetDataRequestManager().CreateLiquidCompartmentDataRequest().Set("VenaCava", *Na, "Molarity", AmountPerVolumeUnit::mmol_Per_L);
   bg->GetEngineTrack()->GetDataRequestManager().SetResultsFilename("HowToFasciculation.csv");
-
-  // Advance some time to get some resting data
   tracker.AdvanceModelTime(60);
 ``` 
 

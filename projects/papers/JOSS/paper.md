@@ -9,12 +9,13 @@ tags:
 authors:
   - name: Austin Baird^[Custom footnotes for e.g. denoting who the corresponding author is can be included like this.]
     orcid: 0000-0002-4711-3016
-    affiliation: "1, 2" # (Multiple affiliations must be quoted)
+    affiliation: 1
   - name: Matthew McDaniel
     affiliation: 1
   - name: Steven A. White
     affiliation: 1
   - name: Nathan Tatum
+  - name: Lucas Marin
     affiliation: 1
 affiliations:
  - name: Applied Research Associates, Inc. Advanced Modeling and Simulation Systems Directorate

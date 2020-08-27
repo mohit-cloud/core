@@ -22,7 +22,7 @@ affiliations:
  - name: Independent Researcher
    index: 3
 date: 13 August 2017
-bibliography: BioGears.bib
+bibliography: paper.bib
 ---
 
 # Summery

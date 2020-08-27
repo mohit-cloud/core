@@ -1,27 +1,27 @@
 ---
-title: 'BioGears: Real-time human physiology'
+title: 'Gala: A Python package for galactic dynamics'
 tags:
-  - C++
-  - Physiology
-  - lumped paramater
-  - Medical
+  - Python
+  - astronomy
+  - dynamics
+  - galactic dynamics
+  - milky way
 authors:
-  - name: Steven A. White, Ph.D
-    orcid: 0000-0001-9598-6439
-    affiliation: 1
-  - name: Austin Baird, Ph.D
-    orcid: 0000-0002-4711-3016
-    affiliation: 1
-  - name: Matthew McDaniel
-    affiliation: 1
-    - name: Nathan Tatum
-    affiliation: 1
-    - name: Lucas Marin
-    affiliation: 1
+  - name: Adrian M. Price-Whelan^[Custom footnotes for e.g. denoting who the corresponding author is can be included like this.]
+    orcid: 0000-0003-0872-7098
+    affiliation: "1, 2" # (Multiple affiliations must be quoted)
+  - name: Author Without ORCID
+    affiliation: 2
+  - name: Author with no affiliation
+    affiliation: 3
 affiliations:
- - name: Advanced Research Associates
+ - name: Lyman Spitzer, Jr. Fellow, Princeton University
    index: 1
-date: 26 August 2020
+ - name: Institution Name
+   index: 2
+ - name: Independent Researcher
+   index: 3
+date: 13 August 2017
 bibliography: BioGears.bib
 ---
 
@@ -40,6 +40,7 @@ The complexity and robustness of the BioGears engine provides application that i
 
 
 # Features
+
 The BioGears engine, once compiled provides a set of libraries that may be included in any application that wishes to leverage a physiological simulation of a patient. In addition, BioGears provides build support and testing for all major user platforms (MacOS, Windows, Linux, and ARM). An instance of a BioGears engine models a single patient's physiology and can be edited at the start of runtime or during the simulation, in the following ways: 
 
 - The patient is defined by parameters, such as height, weight, systolic and diastolic pressure.
@@ -52,6 +53,7 @@ Constructing a pointer to an engine and loading a patient is easy and can be don
 
 Fenced code blocks are rendered with syntax highlighting:
 ```C++
+#include "HowToTracker.h"
 // Include the various types you will be using in your code
 #include <biogears/cdm/compartment/SECompartmentManager.h>
 #include <biogears/cdm/engine/PhysiologyEngineTrack.h>
@@ -89,7 +91,6 @@ A tracker class can then be implemented and data requests logged by the user
   HowToTracker tracker(*bg);
 
   bg->GetEngineTrack()->GetDataRequestManager().CreateLiquidCompartmentDataRequest().Set("VenaCava", *Na, "Molarity", AmountPerVolumeUnit::mmol_Per_L);
-
   bg->GetEngineTrack()->GetDataRequestManager().SetResultsFilename("HowToFasciculation.csv");
 
   // Advance some time to get some resting data

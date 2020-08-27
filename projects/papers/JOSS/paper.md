@@ -9,7 +9,7 @@ tags:
 authors:
   - name: Austin Baird^[Custom footnotes for e.g. denoting who the corresponding author is can be included like this.]
     orcid: 0000-0002-4711-3016
-    affiliation: 1
+    affiliation: "1"
   - name: Matthew McDaniel
     affiliation: 1
     - name: Steven A. White
@@ -51,7 +51,6 @@ The BioGears engine, once compiled provides a set of libraries that may be inclu
 
 Constructing a pointer to an engine and loading a patient is easy and can be done in only a few lines of code:
 
-Fenced code blocks are rendered with syntax highlighting:
 ```C++
 #include "HowToTracker.h"
 #include <biogears/cdm/compartment/SECompartmentManager.h>
@@ -73,7 +72,7 @@ void HowToFaciculation()
   }
 ``` 
 
-A tracker class can then be implemented and data requests logged by the user
+A tracker class can then be implemented and data requests logged by the user:
 
 ```C++
  // The tracker is responsible for advancing the engine time and outputting the data requests below at each time step
@@ -83,7 +82,7 @@ A tracker class can then be implemented and data requests logged by the user
   tracker.AdvanceModelTime(60);
 ``` 
 
-Injuries models can be constructed during runtime and pushed to the engine in a few lines
+Injuries models can be constructed during runtime and pushed to the engine in a few lines:
 
 ```C++
   // Create an SEAirwayObstruction object

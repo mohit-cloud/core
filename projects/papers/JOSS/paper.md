@@ -13,7 +13,9 @@ authors:
   - name: Matthew McDaniel
     affiliation: 1
   - name: Steven A. White
-    affiliation: 3
+    affiliation: 1
+  - name: Nathan Tatum
+    affiliation: 1
 affiliations:
  - name: Applied Research Associates, Inc. Advanced Modeling and Simulation Systems Directorate
    index: 1

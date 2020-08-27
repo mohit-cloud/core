@@ -15,15 +15,12 @@ authors:
   - name: Steven A. White
     affiliation: 1
   - name: Nathan Tatum
+    affiliation: 1
   - name: Lucas Marin
     affiliation: 1
 affiliations:
  - name: Applied Research Associates, Inc. Advanced Modeling and Simulation Systems Directorate
    index: 1
- - name: Institution Name
-   index: 2
- - name: Independent Researcher
-   index: 3
 date: 27 August 2020
 bibliography: paper.bib
 ---

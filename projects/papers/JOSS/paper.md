@@ -10,7 +10,7 @@ authors:
   - name: Austin Baird^[Custom footnotes for e.g. denoting who the corresponding author is can be included like this.]
     orcid: 0000-0002-4711-3016
     affiliation: "1, 2" # (Multiple affiliations must be quoted)
-  - name: Author Without ORCID
+  - name: Matthew McDaniel
     affiliation: 2
   - name: Author with no affiliation
     affiliation: 3

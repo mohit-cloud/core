@@ -11,16 +11,16 @@ authors:
     orcid: 0000-0002-4711-3016
     affiliation: "1, 2" # (Multiple affiliations must be quoted)
   - name: Author Without ORCID
-    affiliation: 1
-    - name: Steven A. White
-    affiliation: 1
-    - name: Nathan Tatum
-    affiliation: 1
-    - name: Lucas Marin
-    affiliation: 1
+    affiliation: 2
+  - name: Author with no affiliation
+    affiliation: 3
 affiliations:
  - name: Applied Research Associates, Inc. Advanced Modeling and Simulation Systems Directorate
    index: 1
+ - name: Institution Name
+   index: 2
+ - name: Independent Researcher
+   index: 3
 date: 27 August 2020
 bibliography: paper.bib
 ---

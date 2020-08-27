@@ -37,7 +37,7 @@ BioGears builds on prior success simulating cardiopulomary dynamics [@otto1899gr
 
 The complexity and robustness of the BioGears engine provides application that include computational medicine research by extending the engine to support models of sepsis [@mcdaniel2019whole], burn [@mcdaniel2019full], surgical planning  [@potter2017physiology], and pharamacological kinetics and clearance [@mcdaniel2019open]. New dugs can be implemented in BioGears by filling in the appropriate physiochemical properties in the provided XML format. The BioGears engine handles computation of clearance, tissue diffusion, and patient responses based on this file and doesn't require additional C++ programming by the user. The software architecture of BioGears is implemented in three layers of abstraction to encourage easy integration and provide a robust application programming interface, \autoref{fig:example}
 
-![Caption for example figure.\label{fig:example}](Fig1.png)
+![Overview of the BioGears engine software structure. The SE layer provides a generic physiologi API and may be leveraged for other physiology engine implementations.\label{fig:example}](Fig1.png)
 
 
 

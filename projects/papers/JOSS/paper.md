@@ -57,13 +57,6 @@ The BioGears engine, once compiled, provides a set of libraries that may be incl
 Constructing a pointer to an engine and loading a patient is easy and can be done in only a few lines of code:
 
 ```C++
-#include "HowToTracker.h"
-#include <biogears/cdm/compartment/SECompartmentManager.h>
-#include <biogears/cdm/engine/PhysiologyEngineTrack.h>
-#include <biogears/cdm/patient/SEPatient.h>
-#include <biogears/cdm/properties/SEScalarTypes.h>
-#include <biogears/cdm/substance/SESubstanceManager.h>
-
 using namespace biogears;
 void HowToFaciculation()
 {
@@ -75,30 +68,27 @@ void HowToFaciculation()
     bg->GetLogger()->Error("Could not load state, check the error");
     return;
   }
-``` 
-
-A tracker class can then be implemented and data requests logged by the user:
-
-```C++
- // The tracker is responsible for advancing the engine time and outputting the data requests below at each time step
-  HowToTracker tracker(*bg);
+ 
   bg->GetEngineTrack()->GetDataRequestManager().CreateLiquidCompartmentDataRequest().Set("VenaCava", *Na, "Molarity", AmountPerVolumeUnit::mmol_Per_L);
   bg->GetEngineTrack()->GetDataRequestManager().SetResultsFilename("HowToFasciculation.csv");
-  tracker.AdvanceModelTime(60);
-``` 
 
-Injuries models can be constructed during runtime and pushed to the engine in a few lines:
+  bg->AdvanceModelTime(1.0, TimeUnit::min); //Advance Simulation time by 1 minute. No DataTracks recorded over this time 
 
-```C++
-  // Create an SEAirwayObstruction object
-  // Set the obstruction severity (a fraction between 0 and 1. For a complete obstruction use 1.) 
+  // Create an AirwayObstruction action with a severity of .6 from a range of [0.0, 1.0]
   SEAirwayObstruction obstruction;
   obstruction.GetSeverity().SetValue(0.6);
   bg->ProcessAction(obstruction);
+  
   bg->GetLogger()->Info("Giving the patient an airway obstruction.");
+  for( auto i = 0; i < 60*60; --i){ 
+     //Advance time for 1 hour and log all EngineTracks to HowtoFasciculation.csv
+     //At a rate of 1hz
+     bg->AdvanceModelTime(1.0, TimeUnit::s);  
+     m_Engine.GetEngineTrack()->TrackData(m_Engine.GetSimulationTime(TimeUnit::s),m_append_data);
+  }
 ``` 
 
-Other examples and use cases can be found in our HowTo functions that we provide to the community as a reference. 
+The Biogears project includes 36 complete howto's which demonstrate various uses of the API and a versitile command line utility for running XML defined Scenarios using the CDM. Additional support can be found by going to [https://biogearsengine.com/] and [https://www.biogears.dev/]
 
 
 # Acknowledgements

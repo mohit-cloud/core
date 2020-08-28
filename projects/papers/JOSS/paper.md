@@ -88,7 +88,7 @@ void HowToFaciculation()
   }
 ``` 
 
-The Biogears project includes 36 complete howto's which demonstrate various uses of the API and a versitile command line utility for running XML defined Scenarios using the CDM. Additional support can be found by going to [https://biogearsengine.com/] and [https://www.biogears.dev/]
+The Biogears project includes 36 complete howto's which demonstrate various uses of the API and a versitile command line utility for running XML defined Scenarios using the CDM. Additional support can be found by going to <https://biogearsengine.com/> and <https://www.biogears.dev/>
 
 
 # Acknowledgements

@@ -31,25 +31,27 @@ BioGears is an open source, extensible human physiology computational engine tha
 
 # Statement of need 
 
-Medical simulation and computational medicine are two fields that are gowning in application diversity and complexity [@sweet2017crest]. Simple CPR manikins are now being replaced with complex robotic systems that can simulate breathing and react to the performance of the trainee. As these systems use-cases grow there is a requirement that they be supplemented with accurate validated physiology. BioGears fills this need by providing a free computational framework to use as a backbone to many of these robotic training manikins and may support other computational medicine research applications. The BioGears project aims to better democratize the construction of high-fidelity medical training by providing a sophisticated, complex physiology engine to developers that is easy to integrate and free to use.
+Medical simulation and computational medicine are two fields that are growing in application diversity and complexity [@sweet2017crest]. Simple CPR manikins are now being replaced with complex robotic systems that can simulate breathing and react to the performance of the trainee. As these systems use-cases grow, there is a requirement that they be supplemented with physiology modeling. BioGears fills this need by providing a free computational framework to use as a backbone to many of these robotic training manikins and may support other computational medicine research applications. The BioGears project aims to better democratize the construction of high-fidelity medical training by providing a sophisticated, complex physiology engine to developers that is easy to integrate and free to use.
 
-BioGears builds on prior success simulating cardiopulomary dynamics [@otto1899grundform][@westerhof2009arterial] by creating a lumped circuit model of the patients circulation and respiration. BioGears implements various models of diffusion and substance transport to properly simulate the gas/blood interface in the lungs. To handle more complex models of physiology, such as pharmacological models, BioGears constructs a set of hierarchal compartments built on top of the circuit analogs. Top most compartments represents system level data, such as the liver, with sub-compartments representing more granular biology of the patient such as the nephron, extravascular tissue, and even intra cellular spaces. A generic data request framework, leveraging XML, is used to access various substance, fluid, thermal, and gas information for a specific compartment of the body. 
+BioGears uses a lumped circuit model to describe the patients circulation and respiration. This approximation of the simulated cardiopulmonary system has been studied in the past and shown to accurately represent the hemodynamics of the arterial system by using resistance and compliance elements[@otto1899grundform][@westerhof2009arterial]. This approximation creates a system that can be solved for rapidly, decreasing the simulation run-time and computational requirements. In addition, BioGears implements various models of diffusion and substance transport to properly simulate the gas/blood interface in the lungs. To handle more complex models of physiology, such as pharmacological models, BioGears constructs a set of hierarchal compartments built on top of the circuit analogs. Top most compartments represents the system level data, such as the liver, with sub-compartments representing more granular biology of the patient such as the nephron, extravascular tissue, and even intra cellular spaces. A generic data request framework, leveraging XML, is used to access various substance, fluid, thermal, and gas information for a specific compartment of the body. 
 
-The complexity and robustness of the BioGears engine provides application that include computational medicine research by extending the engine to support models of sepsis [@mcdaniel2019whole], burn [@mcdaniel2019full], surgical planning  [@potter2017physiology], and pharamacological kinetics and clearance [@mcdaniel2019open]. New dugs can be implemented in BioGears by filling in the appropriate physiochemical properties in the provided XML format. The BioGears engine handles computation of clearance, tissue diffusion, and patient responses based on this file and doesn't require additional C++ programming by the user. The software architecture of BioGears is implemented in three layers of abstraction to encourage easy integration and provide a robust application programming interface, \autoref{fig:example}
+The BioGears engine has been used in numerous applications that include computational medicine research. This work has extended the engine to support models of sepsis [@mcdaniel2019whole], burn [@mcdaniel2019full], surgical planning  [@potter2017physiology], and pharmacological kinetics and clearance [@mcdaniel2019open]. For each application, the patient physiology and traditional interventions used to treat each injury are validated. Full documentation and validation for every action available to the user is provided through our website [link](https://www.biogearsengine.com/)
 
-![Overview of the BioGears engine software structure. The SE layer provides a generic physiologi API and may be leveraged for other physiology engine implementations.\label{fig:example}](Fig1.png)
+New dugs can be implemented in BioGears by filling in the appropriate physiochemical properties in the provided XML format. The BioGears engine handles computation of clearance, tissue diffusion, and patient responses based on this file and doesn't require additional C++ programming by the user. The software architecture of BioGears is implemented in three layers of abstraction to encourage easy integration and provide a robust application programming interface (API), \autoref{fig:example}
+
+![Overview of the BioGears engine software structure. The SE layer provides a generic physiology API and may be leveraged for other physiology engine implementations and or integration with other computational biology applications.\label{fig:example}](Fig1.png)
 
 
 
 
 # Features
 
-The BioGears engine, once compiled provides a set of libraries that may be included in any application that wishes to leverage a physiological simulation of a patient. In addition, BioGears provides build support and testing for all major user platforms (MacOS, Windows, Linux, and ARM). An instance of a BioGears engine models a single patient's physiology and can be edited at the start of runtime or during the simulation, in the following ways: 
+The BioGears engine, once compiled, provides a set of libraries that may be included in any application that wishes to leverage a physiological simulation of a patient. In addition, BioGears provides build support and testing for all major user platforms (MacOS, Windows, Linux, and ARM). An instance of a BioGears engine models a single patient's physiology and can be edited at the start of runtime or during the simulation, in the following ways: 
 
 - The patient is defined by parameters, such as height, weight, systolic and diastolic pressure.
 - You can initialize the patient with specific chronic and/or disease states via conditions.
 - You can modify the patients external environmental conditions (weather, submerge in water, etc.)
-- You can apply various actions (acute insults/injuries, interventions, conscious breathing, exercise, etc.) to be applied to the patient.
+- You can apply various actions: acute insults/injuries, interventions, conscious breathing, exercise, etc.
 - The patient can also interact with equipment models, such as an Anesthesia and/or an ECG Machine as well as an Inhaler via the action framework.
 
 Constructing a pointer to an engine and loading a patient is easy and can be done in only a few lines of code:
@@ -97,14 +99,6 @@ Injuries models can be constructed during runtime and pushed to the engine in a 
 ``` 
 
 Other examples and use cases can be found in our HowTo functions that we provide to the community as a reference. 
-
-# Citations
-
-
-# Figures
-
-Figures can be included like this:
-
 
 
 # Acknowledgements

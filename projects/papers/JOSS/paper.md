@@ -61,30 +61,35 @@ using namespace biogears;
 void HowToFaciculation()
 {
   // Create the engine and load the patient
-  std::unique_ptr<PhysiologyEngine> bg = CreateBioGearsEngine("HowToFasciculation.log");
+  std::unique_ptr<PhysiologyEngine> bg = 
+  CreateBioGearsEngine("HowToFasciculation.log");
   bg->GetLogger()->Info("HowToFasciculation");
 
   if (!bg->LoadState("./states/StandardMale@0s.xml")) {
     bg->GetLogger()->Error("Could not load state, check the error");
     return;
   }
- 
-  bg->GetEngineTrack()->GetDataRequestManager().CreateLiquidCompartmentDataRequest().Set("VenaCava", *Na, "Molarity", AmountPerVolumeUnit::mmol_Per_L);
-  bg->GetEngineTrack()->GetDataRequestManager().SetResultsFilename("HowToFasciculation.csv");
+  
+  // Set data requests and create output file
+  bg->GetEngineTrack()->GetDataRequestManager().
+  CreateLiquidCompartmentDataRequest().
+  Set("VenaCava", *Na, "Molarity", AmountPerVolumeUnit::mmol_Per_L);
+  bg->GetEngineTrack()->GetDataRequestManager().
+  SetResultsFilename("HowToFasciculation.csv");
 
-  bg->AdvanceModelTime(1.0, TimeUnit::min); //Advance Simulation time by 1 minute. No DataTracks recorded over this time 
+  // Advance Simulation time by 1 minute 
+  bg->AdvanceModelTime(1.0, TimeUnit::min); 
 
-  // Create an AirwayObstruction action with a severity of .6 from a range of [0.0, 1.0]
-  SEAirwayObstruction obstruction;
+  // Create an AirwayObstruction action with a severity of .6
   obstruction.GetSeverity().SetValue(0.6);
   bg->ProcessAction(obstruction);
   
   bg->GetLogger()->Info("Giving the patient an airway obstruction.");
   for( auto i = 0; i < 60*60; --i){ 
-     //Advance time for 1 hour and log all EngineTracks to HowtoFasciculation.csv
-     //At a rate of 1hz
+     //Advance time for 1 hour and log EngineTracks to ouput
      bg->AdvanceModelTime(1.0, TimeUnit::s);  
-     m_Engine.GetEngineTrack()->TrackData(m_Engine.GetSimulationTime(TimeUnit::s),m_append_data);
+     m_Engine.GetEngineTrack()->
+     TrackData(m_Engine.GetSimulationTime(TimeUnit::s),m_append_data);
   }
 ``` 
 
